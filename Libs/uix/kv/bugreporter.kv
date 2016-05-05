@@ -1,0 +1,53 @@
+#:kivy 1.9.1
+
+<BugReporter>:
+    txt_traceback: txt_traceback
+    Image:
+        source: root.icon_background
+        opacity: 0.2
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        Label:
+            id: title
+            text: root.label_info_for_user
+            font_size: "16pt"
+            halign: "center"
+            size_hint_y: None
+            height: "30pt"
+        Label:
+            id: subtitle
+            text: root.info_for_user
+            text_size: self.size
+            font_size: "11pt"
+            halign: "center"
+            valign: "top"
+            size_hint_y: None
+            height: "30pt"
+        ScrollView:
+            id: e_scroll
+            bar_width: 10
+            scroll_y: 0
+            TextInput:
+                id: txt_traceback
+                size_hint_y: None
+                height: max(e_scroll.height, self.minimum_height)
+                background_color: 1, 1, 1, 0.05
+                text: root.txt_report
+                foreground_color: 1, 1, 1, 1
+                readonly: root.report_readonly
+        BoxLayout:
+            size_hint: 0.6, None
+            padding: 10, 10
+            height: 50
+            pos_hint: {"x": 0.2}
+            spacing: 5
+            Button:
+                text: root.txt_button_clipboard
+                on_press: root.on_clipboard()
+            Button:
+                text: root.txt_button_report
+                on_press: root.on_report()
+            Button:
+                text: root.txt_button_close
+                on_press: root.on_close()

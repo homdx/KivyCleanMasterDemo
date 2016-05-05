@@ -1,0 +1,137 @@
+#:kivy 1.9.1
+
+<StartScreen>
+    ActionBar:
+        id: actionbar_ID
+        canvas:
+            Color:
+                rgb: root.actionbar_background_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        ActionView:
+            ActionPrevious:
+                id: actionprevious_ID
+                app_icon: root.previous_app_icon
+                previous_image: root.previous_image
+                with_previous: True
+                on_press: root.on_events("on_previous")
+            ActionOverflow:
+                id: actionoverflow_ID
+                overflow_image: root.overflow_image
+    ScreenManager:
+        id: screenmanager_ID
+        Screen:
+            id: screen_ID
+
+            # Тело STORAGE/RAM
+            FloatLayout:
+                id: bodyprogressclean_ID
+                canvas:
+                    Color:
+                        rgb:
+                            0.1607843137254902, 0.34901960784313724, \
+                            0.6784313725490196
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                    # Окружность STORAGE
+                    Color:
+                        rgba:
+                            0.38823529411764707, 0.5254901960784314, \
+                            0.7764705882352941, 1
+                    Line:
+                        width: 3.
+                        circle:
+                            (self.center_x / 1.5, self.center_y / .65, \
+                            min(self.width, self.height) / 4.5, 220, 500, 50)
+                    # Оружность прогресса STORAGE
+                    Color:
+                        rgba:
+                            1.0, 1.0, 1.0, 1
+                    Line:
+                        width: 3.
+
+                    # Окружность RAM
+                    Color:
+                        rgba:
+                            0.38823529411764707, 0.5254901960784314, \
+                            0.7764705882352941, 1
+                    Line:
+                        width: 3.
+                        circle:
+                            (self.center_x / .65, self.center_y / .69, \
+                            min(self.width, self.height) / 7, 220, 500, 50)
+                    # Оружность прогресса RAM
+                    Color:
+                        rgba:
+                            1.0, 1.0, 1.0, 1
+                    Line:
+                        width: 3.
+
+                # Цифры процента прогресса
+                Image:
+                    id: numeralone_ID
+                    size_hint: .1, .1
+                    pos_hint: {"center_x": .3, "center_y": .78}
+                    allow_stretch: True
+                Image:
+                    id: numeraltwo_ID
+                    size_hint: .1, .1
+                    pos_hint: {"center_x": .37, "center_y": .78}
+                    allow_stretch: True
+                Image:
+                    id: percent_ID
+                    size_hint: .05, .05
+                    pos_hint: {"center_x": .43, "center_y": .81}
+                    allow_stretch: True
+                    source: "Data/Images/percent.png"
+
+                # Подписи окружностей прогресса
+                Label:
+                    text: "STORAGE"
+                    bold: True
+                    pos_hint: {"center_x": .34, "center_y": .63}
+                Label:
+                    text: "RAM"
+                    bold: True
+                    pos_hint: {"center_x": .78, "center_y": .63}
+
+                # Строка состояния today_cleaned
+                Image:
+                    source: root.line_today_progress
+                    pos_hint: {"top": .94}
+                Label:
+                    text: root.today_cleaned
+                    pos_hint: {"top": .94}
+
+                # Бокс кнопок меню
+                GridLayout:
+                    id: bodybuttonsmenu_ID
+                    size_hint: 1, .4
+                    cols: 2
+                    padding: 10
+                    spacing: 5
+
+                    # Фоновый цвет меню
+                    canvas.before:
+                        Color:
+                            rgb: 1.0, 1.0, 1.0
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                        # Линии, рзбивающие пункты меню
+                        Color:
+                            rgb: 0, 0, 0
+                        Line:
+                            points:
+                                [0, self.size[1] / 1.9, self.size[0], \
+                                self.size[1] / 1.9]
+                            width: 1
+                        Line:
+                            points:
+                                [self.size[0] / 2, 0, self.size[0] / 2, \
+                                self.size[1] / 1.001]
+                            width: 1

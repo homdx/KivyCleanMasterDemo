@@ -1,0 +1,64 @@
+#:kivy 1.9.1
+
+<About>:
+    ScrollView:
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            spacing: 10
+            padding: 10
+            height: self.minimum_height
+            canvas:
+                Color:
+                    rgb: root.background_color_box_about
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Логотип приложения
+            Image:
+                source: root.icon_logo
+                size_hint_y: None
+
+            # Версия приложения
+            Label:
+                text: root.string_version
+                size_hint_y: None
+                height: "10pt"
+                markup: True
+                italic: True
+
+            # Бокс меню share
+            FloatLayout:
+                id: box_share
+                size_hint_y: None
+
+            # Текст лицензии
+            Label:
+                text: root.text_license
+                text_size: self.size[0], None
+                font_size: "10pt"
+                size_hint_y: None
+                height: self.size[0] + 200
+                markup: True
+
+    # Бокс копирайта
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, .2
+        canvas:
+            Color:
+                rgb: root.background_color_box_about
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgb: root.separator_color_box_about
+            Line:
+                points: [0, self.size[1], self.size[0], self.size[1]]
+                width: 1
+        Label:
+            text: root.text_copyright
+            font_name: "Roboto-Thin"
+            halign: "center"
+            markup: True

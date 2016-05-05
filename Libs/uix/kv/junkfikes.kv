@@ -1,0 +1,82 @@
+#:kivy 1.9.1
+
+<JunkFiles>
+    orientation:  "vertical"
+
+    FloatLayout:
+        id: floatlayout_ID
+        canvas:
+            Color:
+                rgb:
+                    0.1607843137254902, 0.34901960784313724, 0.6784313725490196
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Цифровое табло прогресса
+        BoxLayout:
+            pos_hint: {"center_x": .5, "center_y": .75}
+            size_hint: .7, 1
+            Image:
+                id: numeral_one
+                size_hint: .52, .52
+                source: "Data/Images/6.png"
+            Image:
+                id: numeral_two
+                size_hint: .52, .52
+                source: "Data/Images/5.png"
+            Image:
+                id: point
+                size_hint: .25, .25
+                pos_hint: {"center_y": .18}
+                source: "Data/Images/dot.png"
+            Image:
+                id: numeral_float
+                size_hint: .52, .52
+                source: "Data/Images/8.png"
+            Image:
+                size_hint: .18, .18
+                pos_hint: {"center_y": .48}
+                source: "Data/Images/gb.png"
+
+        # Линия прогресса
+        ProgressLine:
+            id: progresline_ID
+            size_hint: 1, .1
+            pos_hint: {"center_y": .05}
+        Label:
+            id: progreslabel_ID
+            text: "Scanning:"
+            pos_hint: {"center_y": .05}
+
+    ScrollView:
+        size_hint: 1, .6
+        canvas.before:
+            Color:
+                rgb: 1.0, 1.0, 1.0,
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        GridLayout:
+            id: gridlayout_ID
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+    BoxLayout:
+        size_hint_y: None
+        height: 80
+        padding: 10, 10
+        canvas.before:
+            Color:
+                rgb: 1.0, 1.0, 1.0,
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Button:
+            text: "[color=#000000]STOP"
+            font_size: "19sp"
+            bold: True
+            background_normal: "Data/Images/stop_progress.png"
+            #background_down: root.background_down
+            markup: True
