@@ -77,7 +77,8 @@ class StartScreen(BoxLayout):
         self.orientation = "vertical"
 
         # Инстансы виджетов из файла разметки интерфейса startscreen.kv.
-        self.background_action_bar = self.ids.actionbar_ID.canvas.children[3]
+        self.action_bar = self.ids.actionbar_ID
+        self.background_action_bar = self.action_bar.canvas.children[3]
         self.action_overflow = self.ids.actionoverflow_ID
         self.action_previous = self.ids.actionprevious_ID
         self.body_buttons_menu = self.ids.bodybuttonsmenu_ID
@@ -90,8 +91,6 @@ class StartScreen(BoxLayout):
 
         self.create_spinner_items()
         self.create_menu_buttons()
-
-        # print self.body_progress_clean.canvas.children
 
     def create_spinner_items(self):
         """Создает кнопки для выпадающего списка ActionOverflow."""

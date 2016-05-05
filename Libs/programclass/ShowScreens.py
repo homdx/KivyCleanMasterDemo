@@ -27,7 +27,7 @@ class ShowScreens(object):
                 background_down=self.data.about_background_down)
         self.show_new_screen(self.screen_junk_files, "JUNK FILES")
         # Запуск анимации прогресса очистки.
-        self.Clock.schedule_interval(self.animation_progress_junk_files, 0.2)
+        self.Clock.schedule_interval(self.animation_progress_clean, 0.2)
 
     def back_screen(self):
         """Вызывается при событии ActionPrevious в ActionBar.
@@ -40,3 +40,6 @@ class ShowScreens(object):
             self.body_program.screen_manager.screen_names[-1]
         self.body_program.action_previous.title = \
             self.body_program.screen_manager.current
+        self.body_program.background_action_bar.rgb = \
+            self.data.actionbar_background_color
+

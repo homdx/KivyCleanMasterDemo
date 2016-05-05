@@ -10,7 +10,7 @@ from kivy.graphics import Color, Line
 
 
 class ProgressLine(Widget):
-    """Percent line class."""
+    """Линия прогресса."""
 
     bar_value_percent = 0
     color = "#ffffff56"
@@ -43,10 +43,7 @@ class AnimationProgress(object):
         self._g = 89.
         self._b = 173.
 
-    def animation_progress(self, interval):
-        self._set_tick_and_numeral_progress(
-            self.body_program, self.animation_progress)
-
+    def animation_calc_storage(self, interval):
         # Вычисление координаты эллипса прогресса.
         self.body_program.progress_line.circle = \
             ((self.body_program.center_x / 1.5,
@@ -54,10 +51,10 @@ class AnimationProgress(object):
               min(self.body_program.width, self.body_program.height) / 4.5,
               220, ((self._tick * 500) / 178) + 222, 50))
 
-    def animation_progress_junk_files(self, interval):
         self._set_tick_and_numeral_progress(
-            self.screen_junk_files, self.animation_progress_junk_files)
+            self.body_program, self.animation_calc_storage)
 
+    def animation_progress_clean(self, interval):
         if int(self._tick) == 50:
             self.screen_junk_files.gridlayout_ID.children[0].children[
                0].source = "Data/Images/app_uninatall.png"
@@ -78,6 +75,9 @@ class AnimationProgress(object):
         value = ((self._tick - 8) * 100) / 100
         self.screen_junk_files._progresline.bar_value_percent = value
         self.screen_junk_files._progresline.redraw()
+
+        self._set_tick_and_numeral_progress(
+            self.screen_junk_files, self.animation_progress_clean)
 
     def _set_tick_and_numeral_progress(self, layout, callback):
         """

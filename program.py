@@ -39,7 +39,6 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
 
     screen_junk_files = None
     """:class:`~Libs.uix.cleanscreen.CleanScreen`."""
-    print "Call Program"
 
     def __init__(self, **kvargs):
         super(Program, self).__init__(**kvargs)
@@ -67,7 +66,7 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
             name_item_in_spinner_list=data.name_item_in_spinner_list,
             events_callback=self.on_events)
         # Запуск анимации прогресса подсчета STORAGE/RAM.
-        Clock.schedule_interval(self.animation_progress, 0.05)
+        Clock.schedule_interval(self.animation_calc_storage, 0.05)
         return self.body_program
 
     def on_events(self, *args):
