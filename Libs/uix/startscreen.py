@@ -6,18 +6,15 @@
 # Главный экран программы.
 #
 
-try:
-    from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.label import Label
-    from kivy.uix.image import Image
-    from kivy.uix.button import Button
-    from kivy.uix.behaviors import ButtonBehavior
-    from kivy.uix.actionbar import ActionItem
-    from kivy.lang import Builder
-    from kivy.properties import (ObjectProperty, ListProperty,
-                                 StringProperty, DictProperty)
-except Exception as text_error:
-    raise text_error
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.image import Image
+from kivy.uix.button import Button
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.actionbar import ActionItem
+from kivy.lang import Builder
+from kivy.properties import (ObjectProperty, ListProperty, StringProperty,
+                             DictProperty)
 
 
 class ImageButton(ButtonBehavior, Image):

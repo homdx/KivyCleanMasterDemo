@@ -26,6 +26,9 @@ class ShowScreens(object):
                 background_normal=self.data.about_background_normal,
                 background_down=self.data.about_background_down)
         self.show_new_screen(self.screen_junk_files, "JUNK FILES")
+
+        self.body_program.action_previous.app_icon = \
+            self.data.previous_app_icon_left
         # Запуск анимации прогресса очистки.
         self.Clock.schedule_interval(self.animation_progress_clean, 0.2)
 
@@ -40,5 +43,9 @@ class ShowScreens(object):
             self.body_program.screen_manager.screen_names[-1]
         self.body_program.action_previous.title = \
             self.body_program.screen_manager.current
+
+        # Возвращение иконки previous в actionbar.
         self.body_program.background_action_bar.rgb = \
             self.data.actionbar_background_color
+        self.body_program.action_previous.app_icon = \
+            self.data.previous_app_icon

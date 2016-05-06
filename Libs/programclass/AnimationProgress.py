@@ -32,10 +32,10 @@ class AnimationProgress(object):
 
     def animation_progress_clean(self, interval):
         if int(self._tick) == 50:
-            self.screen_junk_files.gridlayout_ID.children[0].children[
+            self.screen_junk_files.grid_layout.children[0].children[
                0].source = "Data/Images/app_uninatall.png"
         elif int(self._tick) == 99:
-            self.screen_junk_files.gridlayout_ID.children[1].children[
+            self.screen_junk_files.grid_layout.children[1].children[
                0].source = "Data/Images/app_uninatall.png"
             self.screen_junk_files.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
@@ -56,7 +56,6 @@ class AnimationProgress(object):
 
         self.screen_junk_files.progres_label.text = \
             "Scanning: {}".format(self.package_for_clean[self._tick - 9])
-
         self._set_tick_and_numeral_progress(
             self.screen_junk_files, self.animation_progress_clean)
 

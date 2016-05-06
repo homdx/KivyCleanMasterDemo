@@ -6,15 +6,12 @@
 # Основной рограммный код приложения.
 #
 
-import traceback
-
 try:
     import kivy
     kivy.require("1.9.1")
 
     from kivy.app import App
     from kivy.uix.screenmanager import Screen, FadeTransition
-    from kivy.core.window import Window
     from kivy.config import ConfigParser
     from kivy.clock import Clock
 
@@ -25,6 +22,8 @@ try:
     from Libs import programclass as program_class  # классы программы
     from Libs import progdata as data  # строковые данные, пути к иконкам
 except Exception:
+    import traceback
+
     raise Exception(traceback.format_exc())
 
 
@@ -49,7 +48,6 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
         self.Clock = Clock
         self.JunkFiles = JunkFiles
 
-        self.open_dialog = False  # если True - открыто диалоговое окно
         self.prog_dir = self.directory
         self.config = ConfigParser()
 
@@ -70,19 +68,23 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
         return self.body_program
 
     def on_events(self, *args):
-        """Оюработчик событий приложения."""
+        """Обработчик событий приложения."""
 
         event = args[0] if isinstance(args[0], str) else args[0].id
+        print event
 
         # -------------------------------ABOUT---------------------------------
         if event == "About":
             self.show_about()
         # ----------------------------ACTION BAR-------------------------------
         elif event == "on_previous":
+            print self.body_program.screen.manager.current
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":
             self.show_junk_files()
+        elif event == "STOP":
+            Clock.unschedule(self.animation_progress_clean)
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""

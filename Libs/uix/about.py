@@ -1,16 +1,13 @@
 #! /usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
-try:
-    from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.button import Button
-    from kivy.uix.label import Label
-    from kivy.uix.image import Image
-    from kivy.lang import Builder
-    from kivy.properties import (DictProperty, StringProperty, ListProperty,
-                                 ObjectProperty)
-except Exception as text_error:
-    raise text_error
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.image import Image
+from kivy.lang import Builder
+from kivy.properties import (DictProperty, StringProperty, ListProperty,
+                             ObjectProperty)
 
 
 class About(BoxLayout):

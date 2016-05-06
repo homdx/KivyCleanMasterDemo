@@ -3,29 +3,34 @@
 #
 # progdata.py
 #
+# Словари, списковые данные приложения.
+#
 
 import os
 import sys
 
+from kivy.config import ConfigParser
+
 
 prog_path = os.path.split(os.path.abspath(sys.argv[0]))[0]
 
-text_license = open("{}/LICENSE".format(prog_path)).read()
-program_title = "Clean Master"
-core_color = {"R": 41., "G": 89., "B": 173.}
-
-program_logo = "Data/Images/logo.png"
-line_today_progress = "Data/Images/line_today_progress.png"
+# -----------------------------------LOCALE-----------------------------------
+config = ConfigParser()
+config.read("{}/Data/locale.ini".format(prog_path))
+language = config.get("LOCALE", "language")
+section = language.upper()
+config.read("{}/Data/Language/{}.ini".format(prog_path, language))
 
 # ---------------------------МЕНЮ ГЛАВНОГО ЭКРАНА-----------------------------
 name_path_buttons_menu = {
-    "JUNK FILES": "Data/Images/clean_cache.png",
-    "MEMORY BOOST": "Data/Images/clean_memory.png",
-    "APP MANAGER": "Data/Images/clean_apk.png",
-    "SECURITY & PRIVACY": "Data/Images/clean_privacy.png"}
+    config.get(section, "JUNK_FILES"): "Data/Images/clean_cache.png",
+    config.get(section, "MEMORY_BOOST"): "Data/Images/clean_memory.png",
+    config.get(section, "APP_MANAGER"): "Data/Images/clean_apk.png",
+    config.get(section, "SECURITY_&_PRIVACY"): "Data/Images/clean_privacy.png"}
 
 # --------------------------------ACTION BAR----------------------------------
 previous_app_icon = "Data/Images/previous_app_icon.png"
+previous_app_icon_left = "Data/Images/arrow_left.png"
 overflow_image = "Data/Images/overflow_image.png"
 previous_image = "Data/Images/previous_image.png"
 actionbar_background_color = \
@@ -33,19 +38,28 @@ actionbar_background_color = \
 action_item_background_normal = "Data/Images/background_action_item.png"
 
 name_item_in_spinner_list = [
-    "Settings", "Update", "Like Us", "Feedback", "FAQ", "About"]
+    config.get(section, "Settings"), config.get(section, "Update"),
+    config.get(section, "Like_Us"), config.get(section, "Feedback"),
+    config.get(section, "FAQ"), config.get(section, "About")]
 
 # -------------------------------ЭКРАН ABOUT----------------------------------
 about_items_share = {
-    "Share this app": "Data/Images/about_share.png",
-    "Like us on Facebook": "Data/Images/about_facebook.png",
-    "Join our beta testing group": "Data/Images/google_plus.png",
-    "Help us with localization": "Data/Images/about_localization.png",
-    "For Business Cooperation": "Data/Images/skype_icon.png"}
+    config.get(section, "Share_app"): "Data/Images/about_share.png",
+    config.get(section, "Like_Facebook"): "Data/Images/about_facebook.png",
+    config.get(section, "Join_group"): "Data/Images/google_plus.png",
+    config.get(section, "Help_localization"): "Data/Images/about_localization.png",
+    config.get(section, "Business_Cooperation"): "Data/Images/skype_icon.png"}
 about_background_normal = "Data/Images/background_normal.png"
 about_background_down = "Data/Images/background_down.png"
+text_license = open("{}/LICENSE".format(prog_path)).read()
 
 # ----------------------------ЭКРАН JUNK FILES---------------------------------
 junk_files_items = {
-    "Memory boost": "Data/Images/memory_boost.png",
-    "Cache junk": "Data/Images/cache_junk.png"}
+    config.get(section, "Memory_boost"): "Data/Images/memory_boost.png",
+    config.get(section, "Cache_junk"): "Data/Images/cache_junk.png"}
+
+program_title = str(config.get(section, "program_title"))
+core_color = {"R": 41., "G": 89., "B": 173.}
+
+program_logo = "Data/Images/logo.png"
+line_today_progress = "Data/Images/line_today_progress.png"

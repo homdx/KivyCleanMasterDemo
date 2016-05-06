@@ -37,11 +37,10 @@
                 foreground_color: 1, 1, 1, 1
                 readonly: root.report_readonly
         BoxLayout:
-            size_hint: 0.6, None
-            padding: 10, 10
+            size_hint: 1, None
+            padding: 5, 5
             height: 50
-            pos_hint: {"x": 0.2}
-            spacing: 5
+            spacing: 2
             Button:
                 text: root.txt_button_clipboard
                 on_press: root.on_clipboard()
