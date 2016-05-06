@@ -42,4 +42,3 @@ class ShowScreens(object):
             self.body_program.screen_manager.current
         self.body_program.background_action_bar.rgb = \
             self.data.actionbar_background_color
-

@@ -47,6 +47,7 @@ class JunkFiles(BoxLayout):
         self.numeral_one = self.ids.numeral_one
         self.numeral_two = self.ids.numeral_two
         self.numeral_float = self.ids.numeral_float
+        self.progres_label = self.ids.progreslabel_ID
 
         self._background = self.ids.floatlayout_ID.canvas.children[0]
         self._progresline = self.ids.progresline_ID

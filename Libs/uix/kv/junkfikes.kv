@@ -47,7 +47,10 @@
         Label:
             id: progreslabel_ID
             text: "Scanning:"
+            text_size: root.width - 20, root.height
             pos_hint: {"center_y": .05}
+            valign: "middle"
+            on_touch_down: print root.width
 
     ScrollView:
         size_hint: 1, .6

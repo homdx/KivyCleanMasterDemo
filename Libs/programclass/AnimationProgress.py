@@ -4,6 +4,8 @@
 # AnimationProgress.py
 #
 
+import os
+
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
 from kivy.graphics import Color, Line
@@ -43,6 +45,9 @@ class AnimationProgress(object):
         self._g = 89.
         self._b = 173.
 
+        py_path = os.path.split(os.__file__)[0]
+        self.package_for_clean = os.listdir(py_path)
+
     def animation_calc_storage(self, interval):
         # Вычисление координаты эллипса прогресса.
         self.body_program.progress_line.circle = \
@@ -75,6 +80,9 @@ class AnimationProgress(object):
         value = ((self._tick - 8) * 100) / 100
         self.screen_junk_files._progresline.bar_value_percent = value
         self.screen_junk_files._progresline.redraw()
+
+        self.screen_junk_files.progres_label.text = \
+            "Scanning: {}".format(self.package_for_clean[self._tick - 9])
 
         self._set_tick_and_numeral_progress(
             self.screen_junk_files, self.animation_progress_clean)
