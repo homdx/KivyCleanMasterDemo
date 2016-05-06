@@ -6,20 +6,16 @@
 # Экран процесса очистки.
 #
 
-from Libs.programclass.AnimationProgress import ProgressLine
-
 try:
     from kivy.uix.boxlayout import BoxLayout
     from kivy.uix.button import Button
     from kivy.lang import Builder
     from kivy.properties import StringProperty, DictProperty
+
+    from progressline import ProgressLine
+    from custombutton import CustomButton
 except Exception as text_error:
     raise text_error
-
-
-class CustomButton(Button):
-    button_text = StringProperty("")
-    icon = StringProperty("")
 
 
 class JunkFiles(BoxLayout):
@@ -49,6 +45,7 @@ class JunkFiles(BoxLayout):
         self.numeral_float = self.ids.numeral_float
         self.progres_label = self.ids.progreslabel_ID
 
+        self.button_stop = self.ids.buttonstop_ID
         self._background = self.ids.floatlayout_ID.canvas.children[0]
         self._progresline = self.ids.progresline_ID
 
