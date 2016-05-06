@@ -15,8 +15,8 @@
     Image:
         source: root.icon
         size_hint_y: None
-        pos: root.x - root.size[0] / 2 + 25, root.y
-        size: root.size
+        height: 30
+        pos: root.x - 25, root.y + self.height / 2
     # Иконка прогресса очистки
     Image:
         id: iconcleanID
@@ -24,3 +24,4 @@
         size_hint_y: None
         pos: root.width / 2 - 25, root.y
         size: root.size
+
