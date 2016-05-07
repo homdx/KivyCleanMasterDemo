@@ -12,7 +12,6 @@ try:
 
     from kivy.app import App
     from kivy.uix.screenmanager import Screen, FadeTransition
-    from kivy.config import ConfigParser
     from kivy.clock import Clock
 
     from Libs.uix.startscreen import StartScreen  # главный экран программы
@@ -46,9 +45,7 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
         self.About = About
         self.Clock = Clock
         self.JunkFiles = JunkFiles
-
         self.prog_dir = self.directory
-        self.config = ConfigParser()
 
     def build(self):
         # Главный экран программы.
