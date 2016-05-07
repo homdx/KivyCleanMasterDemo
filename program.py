@@ -20,7 +20,6 @@ try:
     from Libs.uix.junkfiles import JunkFiles
 
     from Libs import programclass as program_class  # классы программы
-    from Libs import progdata as data  # строковые данные, пути к иконкам
 except Exception:
     import traceback
 
