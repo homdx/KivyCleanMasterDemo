@@ -39,6 +39,7 @@ class StartScreen(BoxLayout):
         self.layouts = self.ids
         self.background_action_bar = self.ids.action_bar.canvas.children[3]
         self.progress_line = self.ids.body_progress_clean.canvas.children[8]
+        self.body_progress_clean = self.ids.body_progress_clean
 
         self.create_spinner_items()
         self.create_menu_buttons()

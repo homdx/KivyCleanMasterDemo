@@ -71,6 +71,8 @@
                             1.0, 1.0, 1.0, 1
                     Line:
                         width: 3.
+                on_touch_down:
+                    print (self.center_x / 1.5, self.center_y / .65, min(self.width, self.height) / 4.5, 220, 500, 50)
 
                 # Цифры процента прогресса
                 Image:

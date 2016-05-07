@@ -50,6 +50,7 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
     def build(self):
         # Главный экран программы.
         self.body_program = StartScreen(events_callback=self.on_events)
+        self.rrr()
         # Запуск анимации прогресса подсчета STORAGE/RAM.
         Clock.schedule_interval(self.animation_calc_storage, 0.05)
         return self.body_program

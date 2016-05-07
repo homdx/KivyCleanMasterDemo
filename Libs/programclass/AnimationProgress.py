@@ -5,7 +5,7 @@
 #
 
 import os
-
+from kivy.graphics import Color, Line
 
 class AnimationProgress(object):
     """Анимации прогрессов приложения."""
@@ -19,14 +19,31 @@ class AnimationProgress(object):
         py_path = os.path.split(os.__file__)[0]
         self.package_for_clean = os.listdir(py_path)
 
+    def rrr(self):
+        self.body_program.body_progress_clean.bind(
+            pos=self.redraw_ellipse_progress)
+        self.body_program.body_progress_clean.bind(
+            size=self.redraw_ellipse_progress)
+
+    def redraw_ellipse_progress(self, *args):
+        """Отрисовка новых координат линии прогресса."""
+
+        self.body_program.progress_line.circle = \
+                ((self.body_program.body_progress_clean.center_x / 1.5,
+                  self.body_program.body_progress_clean.center_y / .65,
+                  min(self.body_program.body_progress_clean.width,
+                      self.body_program.body_progress_clean.height) / 4.5,
+                  220, 500, 50))
+
     def animation_calc_storage(self, interval):
-        # Вычисление координаты эллипса прогресса.
+        """Отрисовка новых координат эллипса прогресса."""
+
         self.body_program.progress_line.circle = \
             ((self.body_program.center_x / 1.5,
               self.body_program.center_y / .705,
               min(self.body_program.width, self.body_program.height) / 4.5,
               220, ((self._tick * 500) / 178) + 222, 50))
-
+        # Вычисление координаты эллипса прогресса.
         self._set_tick_and_numeral_progress(
             self.body_program.layouts, self.animation_calc_storage)
 
