@@ -38,8 +38,8 @@ class StartScreen(BoxLayout):
         # Инстансы виджетов из файла разметки интерфейса startscreen.kv.
         self.layouts = self.ids
         self.background_action_bar = self.ids.action_bar.canvas.children[3]
-        self.progress_line = self.ids.body_progress_clean.canvas.children[8]
-        self.body_progress_clean = self.ids.body_progress_clean
+        self.progress_line = self.ids.progress_calc_storage_ram.canvas.children[8]
+        self.progress_calc_storage_ram = self.ids.progress_calc_storage_ram
 
         self.create_spinner_items()
         self.create_menu_buttons()

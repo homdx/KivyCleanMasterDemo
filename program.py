@@ -14,11 +14,11 @@ try:
     from kivy.uix.screenmanager import Screen, FadeTransition
     from kivy.clock import Clock
 
-    from Libs.uix.startscreen import StartScreen  # главный экран программы
+    from Libs.uix.startscreen import StartScreen
     from Libs.uix.about import About
     from Libs.uix.junkfiles import JunkFiles
 
-    from Libs import programclass as program_class  # классы программы
+    from Libs.programclass import ShowScreens, AnimationProgress
 except Exception:
     import traceback
 
@@ -28,7 +28,7 @@ except Exception:
 __version__ = "0.0.1"
 
 
-class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
+class Program(App, ShowScreens, AnimationProgress):
     """Функционал программы"""
 
     title = "Clean Master"  # заголовок окна программы
@@ -50,9 +50,14 @@ class Program(App, program_class.ShowScreens, program_class.AnimationProgress):
     def build(self):
         # Главный экран программы.
         self.body_program = StartScreen(events_callback=self.on_events)
-        self.rrr()
+
+        self.body_program.progress_calc_storage_ram.bind(
+            pos=self.redraw_ellipse_progress_calc_storage_ram)
+        self.body_program.progress_calc_storage_ram.bind(
+            size=self.redraw_ellipse_progress_calc_storage_ram)
+
         # Запуск анимации прогресса подсчета STORAGE/RAM.
-        Clock.schedule_interval(self.animation_calc_storage, 0.05)
+        Clock.schedule_interval(self.animation_calc_storage_ram, 0.05)
         return self.body_program
 
     def on_events(self, *args):
