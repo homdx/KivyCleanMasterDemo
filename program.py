@@ -21,7 +21,6 @@ try:
     from Libs.programclass import ShowScreens, AnimationProgress
 except Exception:
     import traceback
-
     raise Exception(traceback.format_exc())
 
 
@@ -50,14 +49,11 @@ class Program(App, ShowScreens, AnimationProgress):
     def build(self):
         # Главный экран программы.
         self.body_program = StartScreen(events_callback=self.on_events)
-
-        self.body_program.progress_calc_storage_ram.bind(
-            pos=self.redraw_ellipse_progress_calc_storage_ram)
-        self.body_program.progress_calc_storage_ram.bind(
-            size=self.redraw_ellipse_progress_calc_storage_ram)
-
+        self.body_program.layouts.float_layout.bind(
+            pos=self.animation_storage_ram)
+        self.body_program.layouts.float_layout.bind(size=self.animation_storage_ram)
         # Запуск анимации прогресса подсчета STORAGE/RAM.
-        Clock.schedule_interval(self.animation_calc_storage_ram, 0.05)
+        Clock.schedule_interval(self.calc_elliptical_length, 0.05)
         return self.body_program
 
     def on_events(self, *args):

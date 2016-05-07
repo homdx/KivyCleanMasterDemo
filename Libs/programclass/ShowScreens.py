@@ -19,7 +19,7 @@ class ShowScreens(object):
         self.body_program.layouts.action_previous.app_icon = \
             "Data/Images/arrow_left.png"
         # Запуск анимации прогресса очистки.
-        self.Clock.schedule_interval(self.animation_progress_clean, 0.2)
+        self.Clock.schedule_interval(self.animation_clean, 0.2)
 
     def back_screen(self):
         """Вызывается при событии ActionPrevious в ActionBar.
@@ -27,7 +27,7 @@ class ShowScreens(object):
 
         # Если открыт экран процесса очистки.
         if self.body_program.layouts.screen.manager.current == "JUNK FILES":
-            self.Clock.unschedule(self.animation_progress_clean)
+            self.Clock.unschedule(self.animation_clean)
 
         if len(self.body_program.layouts.screen_manager.screens) != 1:
             self.body_program.layouts.screen_manager.screens.pop()

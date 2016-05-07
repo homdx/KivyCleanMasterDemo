@@ -28,7 +28,7 @@
 
             # Тело STORAGE/RAM
             FloatLayout:
-                id: progress_calc_storage_ram
+                id: float_layout
                 canvas:
                     Color:
                         rgb:
@@ -71,24 +71,40 @@
                             1.0, 1.0, 1.0, 1
                     Line:
                         width: 3.
-                on_touch_down:
-                    print (self.center_x / 1.5, self.center_y / .65, min(self.width, self.height) / 4.5, 220, 500, 50)
 
-                # Цифры процента прогресса
+                # Цифры процента прогресса STORAGE
                 Image:
-                    id: numeral_one
-                    size_hint: .1, .1
-                    pos_hint: {"center_x": .3, "center_y": .78}
+                    id: storage_numeral_one
+                    size_hint: .14, .14
+                    pos_hint: {"center_x": .28, "center_y": .76}
                     allow_stretch: True
                 Image:
-                    id: numeral_two
-                    size_hint: .1, .1
-                    pos_hint: {"center_x": .37, "center_y": .78}
+                    id: storage_numeral_two
+                    size_hint: .14, .14
+                    pos_hint: {"center_x": .39, "center_y": .76}
                     allow_stretch: True
                 Image:
-                    id: percent_ID
+                    size_hint: .06, .06
+                    pos_hint: {"center_x": .47, "center_y": .82}
+                    allow_stretch: True
+                    source: "Data/Images/percent.png"
+
+                # Цифры процента прогресса STORAGE
+                Image:
+                    id: ram_numeral_one
+                    size_hint: .07, .07
+                    pos_hint: {"center_x": .74, "center_y": .72}
+                    source: "Data/Images/3.png"
+                    allow_stretch: True
+                Image:
+                    id: ram_numeral_two
+                    size_hint: .07, .07
+                    pos_hint: {"center_x": .80, "center_y": .72}
+                    source: "Data/Images/4.png"
+                    allow_stretch: True
+                Image:
                     size_hint: .05, .05
-                    pos_hint: {"center_x": .43, "center_y": .81}
+                    pos_hint: {"center_x": .85, "center_y": .74}
                     allow_stretch: True
                     source: "Data/Images/percent.png"
 
@@ -97,10 +113,24 @@
                     text: "STORAGE"
                     bold: True
                     pos_hint: {"center_x": .34, "center_y": .63}
+                    color:
+                        0.6784313725490196, 0.7294117647058823, \
+                        0.8392156862745098, 1
+                Label:
+                    text: "124.40MB/704.99MB"
+                    bold: True
+                    pos_hint: {"center_x": .34, "center_y": .68}
+                    color:
+                        0.6784313725490196, 0.7294117647058823, \
+                        0.8392156862745098, 1
+                    font_size: "10sp"
                 Label:
                     text: "RAM"
                     bold: True
                     pos_hint: {"center_x": .78, "center_y": .63}
+                    color:
+                        0.6784313725490196, 0.7294117647058823, \
+                        0.8392156862745098, 1
 
                 # Строка состояния today_cleaned
                 Label:

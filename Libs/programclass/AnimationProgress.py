@@ -5,7 +5,7 @@
 #
 
 import os
-from kivy.graphics import Color, Line
+
 
 class AnimationProgress(object):
     """Анимации прогрессов приложения."""
@@ -19,50 +19,36 @@ class AnimationProgress(object):
         py_path = os.path.split(os.__file__)[0]
         self.package_for_clean = os.listdir(py_path)
 
-    def redraw_ellipse_progress_calc_storage_ram(self, *args):
-        """Отрисовка новых координат линии прогресса."""
+    def animation_storage_ram(self, *args):
+        """Отрисовка эллипса прогресса."""
+
+        if isinstance(args[0], int):  # при отрисовке прогресса
+            progress_elliptical_length = args[0]
+        else:  # при изменении размера окна приложения
+            progress_elliptical_length = 500
 
         self.body_program.progress_line.circle = \
-                ((self.body_program.progress_calc_storage_ram.center_x / 1.5,
-                  self.body_program.progress_calc_storage_ram.center_y / .65,
-                  min(self.body_program.progress_calc_storage_ram.width,
-                      self.body_program.progress_calc_storage_ram.height) / 4.5,
-                  220, 500, 50))
+            ((self.body_program.layouts.float_layout.center_x / 1.5,
+              self.body_program.layouts.float_layout.center_y / .65,
+              min(self.body_program.layouts.float_layout.width,
+                  self.body_program.layouts.float_layout.height) / 4.5,
+              220, progress_elliptical_length, 50))
 
-    def animation_calc_storage_ram(self, interval):
-        """Отрисовка новых координат эллипса прогресса."""
-
-        self.body_program.progress_line.circle = \
-                ((self.body_program.progress_calc_storage_ram.center_x / 1.5,
-                  self.body_program.progress_calc_storage_ram.center_y / .65,
-                  min(self.body_program.progress_calc_storage_ram.width,
-                      self.body_program.progress_calc_storage_ram.height) / 4.5,
-                  220, ((self._tick * 500) / 178) + 222, 50))
-
-        # Вычисление координаты эллипса прогресса.
-        self._set_tick_and_numeral_progress(
-            self.body_program.layouts, self.animation_calc_storage_ram)
-
-    def animation_progress_clean(self, interval):
+    def animation_clean(self, interval):
         if int(self._tick) == 50:
             self.screen_junk_files.layouts.grid_layout.children[0].children[
                0].source = "Data/Images/app_uninatall.png"
-            self.screen_junk_files.layouts.grid_layout.children[0].children[
-               0].reload()
         elif int(self._tick) == 99:
             self.screen_junk_files.layouts.grid_layout.children[1].children[
                0].source = "Data/Images/app_uninatall.png"
             self.screen_junk_files.layouts.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
 
-        self._r += 2
-        self._g += 1
-        self._b -= 1
-        update_background_color = \
-            self._r / 255., self._g / 255., self._b / 255.
+        self._r += 2; self._g += 1; self._b -= 1
+        new_color = self._r / 255., self._g / 255., self._b / 255.
 
-        self.screen_junk_files._background.rgb = update_background_color
-        self.body_program.background_action_bar.rgb = update_background_color
+        self.screen_junk_files._background.rgb = new_color
+        self.body_program.background_action_bar.rgb = new_color
 
         # Вычисление и установка линии прогресса.
         value = ((self._tick - 8) * 100) / 100
@@ -71,10 +57,9 @@ class AnimationProgress(object):
 
         self.screen_junk_files.layouts.progress_label.text = \
             "Scanning: {}".format(self.package_for_clean[self._tick - 9])
-        self._set_tick_and_numeral_progress(
-            self.screen_junk_files.layouts, self.animation_progress_clean)
+        self.animation_percent(self.screen_junk_files.layouts, self.animation_clean)
 
-    def _set_tick_and_numeral_progress(self, layout, callback):
+    def animation_percent(self, layout, callback):
         """
         Устанавливает на экране цифры процента очистки.
 
@@ -95,8 +80,13 @@ class AnimationProgress(object):
             return
 
         numeral_one, numeral_two = divmod(self._tick, 10)
-        layout.numeral_one.source = "Data/Images/{}.png".format(
-            int(numeral_one))
-        layout.numeral_two.source = "Data/Images/{}.png".format(
-            int(numeral_two))
+        layout.storage_numeral_one.source = "Data/Images/{}.png".format(int(numeral_one))
+        layout.storage_numeral_two.source = "Data/Images/{}.png".format(int(numeral_two))
 
+    def calc_elliptical_length(self, interval):
+        """Отрисовка новых координат эллипса прогресса."""
+
+        elliptical_length = ((self._tick * 500) / 178) + 222
+ 
+        self.animation_storage_ram(elliptical_length)
+        self.animation_percent(self.body_program.layouts, self.calc_elliptical_length)
