@@ -26,7 +26,7 @@ class ShowScreens(object):
         Устанавливает предыдущий и удаляет из списка текущий экран."""
 
         # Если открыт экран процесса очистки.
-        if self.body_program.layouts.screen.manager.current == "JUNK_FILES":
+        if self.body_program.layouts.screen.manager.current == "JUNK FILES":
             self.Clock.unschedule(self.animation_progress_clean)
 
         if len(self.body_program.layouts.screen_manager.screens) != 1:
