@@ -5,9 +5,11 @@
 #
 
 from kivy.uix.button import Button
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 
 
 class CustomButton(Button):
+    button_height = NumericProperty(65)
     button_text = StringProperty("")
     icon = StringProperty("")
+    icon_height = NumericProperty(30)

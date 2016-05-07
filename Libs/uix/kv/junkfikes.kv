@@ -4,7 +4,7 @@
     orientation:  "vertical"
 
     FloatLayout:
-        id: floatlayout_ID
+        id: float_layout
         canvas:
             Color:
                 rgb:
@@ -41,11 +41,11 @@
 
         # Линия прогресса
         ProgressLine:
-            id: progresline_ID
+            id: progress_line
             size_hint: 1, .1
             pos_hint: {"center_y": .05}
         Label:
-            id: progreslabel_ID
+            id: progress_label
             text: "Scanning:"
             text_size: root.width - 20, root.height
             pos_hint: {"center_y": .05}
@@ -60,7 +60,7 @@
                 pos: self.pos
                 size: self.size
         GridLayout:
-            id: gridlayout_ID
+            id: grid_layout
             cols: 1
             size_hint_y: None
             height: self.minimum_height
@@ -76,10 +76,10 @@
                 pos: self.pos
                 size: self.size
         Button:
-            id: buttonstop_ID
-            text: "[color=#000000]STOP"
+            id: button_stop
+            text: "STOP"
             font_size: "19sp"
             bold: True
             background_normal: "Data/Images/stop_progress.png"
             #background_down: root.background_down
-            markup: True
+            color: 0.1, 0.1, 0.1, 1

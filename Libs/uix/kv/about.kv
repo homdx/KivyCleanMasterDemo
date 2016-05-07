@@ -1,6 +1,9 @@
 #:kivy 1.9.1
+#:import exists os.path.exists
 
 <About>:
+    orientation: "vertical"
+
     ScrollView:
         GridLayout:
             cols: 1
@@ -10,37 +13,43 @@
             height: self.minimum_height
             canvas:
                 Color:
-                    rgb: root.background_color_box_about
+                    rgb:
+                        0.7294117647058823, 0.7686274509803922, \
+                        0.8470588235294118
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
             # Логотип приложения
             Image:
-                source: root.icon_logo
+                source: "Data/Images/logo.png"
                 size_hint_y: None
 
             # Версия приложения
             Label:
-                text: root.string_version
+                text: "Clean Master 5.4.0.1395"
                 size_hint_y: None
                 height: "10pt"
-                markup: True
+                color: 0.1, 0.1, 0.1, 1
                 italic: True
 
             # Бокс меню share
-            FloatLayout:
+            GridLayout:
                 id: box_share
+                cols: 1
                 size_hint_y: None
+                height: self.minimum_height
 
-            # Текст лицензии
+                # Текст лицензии
             Label:
-                text: root.text_license
+                text:
+                    open("LICENSE").read() if exists("LICENSE") else \
+                    "Demo Clean Master"
                 text_size: self.size[0], None
                 font_size: "10pt"
                 size_hint_y: None
-                height: self.size[0] + 200
-                markup: True
+                height: root.height / 1.8
+                color: 0.1, 0.1, 0.1, 1
 
     # Бокс копирайта
     BoxLayout:
@@ -48,17 +57,17 @@
         size_hint: 1, .2
         canvas:
             Color:
-                rgb: root.background_color_box_about
+                rgb: 0.7294117647058823, 0.7686274509803922, 0.8470588235294118
             Rectangle:
                 pos: self.pos
                 size: self.size
             Color:
-                rgb: root.separator_color_box_about
+                rgb: 0.5843137254901961, 0.5843137254901961, 0.5843137254901961
             Line:
                 points: [0, self.size[1], self.size[0], self.size[1]]
                 width: 1
         Label:
-            text: root.text_copyright
+            text: "Copyright 2016 Demo Clean Master\nby HeaTTheatR"
             font_name: "Roboto-Thin"
             halign: "center"
-            markup: True
+            color: 0.1, 0.1, 0.1, 1

@@ -2,31 +2,33 @@
 
 <StartScreen>
     ActionBar:
-        id: actionbar_ID
+        id: action_bar
         canvas:
             Color:
-                rgb: root.actionbar_background_color
+                rgb:
+                    0.1568627450980392, 0.34509803921568627, \
+                    0.6784313725490196
             Rectangle:
                 pos: self.pos
                 size: self.size
         ActionView:
             ActionPrevious:
-                id: actionprevious_ID
-                app_icon: root.previous_app_icon
-                previous_image: root.previous_image
+                id: action_previous
+                app_icon: "Data/Images/previous_app_icon.png"
+                previous_image: "Data/Images/previous_image.png"
                 with_previous: True
-                on_press: root.on_events("on_previous")
+                on_press: root.events_callback("on_previous")
             ActionOverflow:
-                id: actionoverflow_ID
-                overflow_image: root.overflow_image
+                id: action_overflow
+                overflow_image: "Data/Images/overflow_image.png"
     ScreenManager:
-        id: screenmanager_ID
+        id: screen_manager
         Screen:
-            id: screen_ID
+            id: screen
 
             # Тело STORAGE/RAM
             FloatLayout:
-                id: bodyprogressclean_ID
+                id: body_progress_clean
                 canvas:
                     Color:
                         rgb:
@@ -72,12 +74,12 @@
 
                 # Цифры процента прогресса
                 Image:
-                    id: numeralone_ID
+                    id: numeral_one
                     size_hint: .1, .1
                     pos_hint: {"center_x": .3, "center_y": .78}
                     allow_stretch: True
                 Image:
-                    id: numeraltwo_ID
+                    id: numeral_two
                     size_hint: .1, .1
                     pos_hint: {"center_x": .37, "center_y": .78}
                     allow_stretch: True
@@ -99,16 +101,20 @@
                     pos_hint: {"center_x": .78, "center_y": .63}
 
                 # Строка состояния today_cleaned
-                Image:
-                    source: root.line_today_progress
-                    pos_hint: {"top": .94}
                 Label:
-                    text: root.today_cleaned
-                    pos_hint: {"top": .94}
+                    size_hint: 1, .05
+                    text: "Today cleaned: 0.0B Total: 0.0B"
+                    pos_hint: {"top": .45}
+                    canvas:
+                        Color:
+                            rgba: 1.0, 1.0, 1.0, 0.3
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 # Бокс кнопок меню
                 GridLayout:
-                    id: bodybuttonsmenu_ID
+                    id: body_buttons_menu
                     size_hint: 1, .4
                     cols: 2
                     padding: 10

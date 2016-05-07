@@ -1,22 +1,22 @@
 #:kivy 1.9.1
 
 <CustomButton@Button>
-    id: "{}ID".format(root.button_text)
     text: root.button_text
-    background_normal: root.background_normal
-    background_down: root.background_down
+    background_normal: "Data/Images/background_action_item.png"
+    background_down: "Data/Images/background_down.png"
     size_hint_y: None
     text_size: root.width - 150, root.height
     valign: "middle"
-    height: 65
-    markup: True
+    height: root.button_height
+    color: 0.1, 0.1, 0.1, 1
 
     # Иконка действия очистки
     Image:
         source: root.icon
         size_hint_y: None
-        height: 30
+        height: root.icon_height
         pos: root.x - 25, root.y + self.height / 2
+        #root.y + self.height / 2
     # Иконка прогресса очистки
     Image:
         source: "Data/Images/loading.gif"

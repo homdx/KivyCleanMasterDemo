@@ -6,37 +6,17 @@
 # Экран процесса очистки.
 #
 
-try:
-    from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.button import Button
-    from kivy.lang import Builder
-    from kivy.properties import StringProperty, DictProperty, ObjectProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.lang import Builder
+from kivy.properties import ObjectProperty
 
-    from progressline import ProgressLine
-    from custombutton import CustomButton
-except Exception as text_error:
-    raise text_error
+from progressline import ProgressLine
+from custombutton import CustomButton
 
 
 class JunkFiles(BoxLayout):
     events_callback = ObjectProperty(None)
     """Функция обработки сигналов экрана."""
-
-    item_menu_color = StringProperty("#000000")
-    """Цвет имен пунктов списка действий очистки."""
-
-    text_button_stop = StringProperty("STOP")
-    """Текст кнопки остановки прогресса очистки."""
-
-    junk_files_items = DictProperty({})
-    """Список кнопок с именем и иконкой действий очистки -
-    {"Name Clean": "path/to/icon", ... }"""
-
-    background_normal = StringProperty(
-        "atlas://data/images/defaulttheme/button")
-    background_down = StringProperty(
-        "atlas://data/images/defaulttheme/button_pressed")
-    """Пути к фоновым изображениям статической и нажатой кнопок"""
 
     Builder.load_file("Libs/uix/kv/junkfikes.kv")
     Builder.load_file("Libs/uix/kv/custombutton.kv")
@@ -46,47 +26,21 @@ class JunkFiles(BoxLayout):
         super(JunkFiles, self).__init__(**kvargs)
 
         # Объекты виждетов Image - циферблат прогресса очистки.
-        self.numeral_one = self.ids.numeral_one
-        self.numeral_two = self.ids.numeral_two
-        self.numeral_float = self.ids.numeral_float
-        self.progres_label = self.ids.progreslabel_ID
+        self.layouts = self.ids
+        self._background = self.ids.float_layout.canvas.children[0]
 
-        self.button_stop = self.ids.buttonstop_ID
-        self.button_stop.bind(on_press=lambda *args: self.on_events(
-            self.text_button_stop))
-
-        self.grid_layout = self.ids.gridlayout_ID
-        self._background = self.ids.floatlayout_ID.canvas.children[0]
-        self._progresline = self.ids.progresline_ID
-
+        self.layouts.button_stop.bind(
+            on_press=lambda *args: self.events_callback("STOP"))
         self.create_custom_button()
 
     def create_custom_button(self):
-        """Создает список кнопок с именем и иконкой действий очистки.
+        """Создает список кнопок с именем и иконкой действий очистки."""
 
-        :type gridlayout_ID: <'kivy.weakproxy.WeakProxy'>
-        :param gridlayout_ID: <'kivy.uix.gridlayout.GridLayout'>
+        junk_files_items = {"Memory boost": "Data/Images/memory_boost.png",
+                            "Cache junk": "Data/Images/cache_junk.png"}
 
-        """
-
-        for name_application in self.junk_files_items.keys():
-            path_to_icon_action = \
-                self.junk_files_items[name_application]
-            cleaning_action_name = \
-                "[color={}]{}".format(self.item_menu_color, name_application)
-
-            self.grid_layout.add_widget(
+        for action_clean in junk_files_items.keys():
+            path_to_icon_action = junk_files_items[action_clean]
+            self.layouts.grid_layout.add_widget(
                 CustomButton(icon=path_to_icon_action,
-                             button_text=cleaning_action_name,
-                             background_normal=self.background_normal,
-                             background_down=self.background_down))
-
-    def on_events(self, instance_button_menu):
-        """Вызывается при нажатии кнопок меню программы.
-
-        :type button_menu: instance <class 'kivy.uix.button.Button'>;
-
-        """
-
-        if callable(self.events_callback):
-            self.events_callback(instance_button_menu)
+                             button_text=action_clean))

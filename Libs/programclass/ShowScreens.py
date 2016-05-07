@@ -9,26 +9,15 @@ class ShowScreens(object):
     """Выводит новые экраны."""
 
     def show_about(self):
-        screen_about = \
-            self.About(name_items_share=self.data.about_items_share,
-                       icon_logo=self.data.program_logo,
-                       background_normal=self.data.about_background_normal,
-                       background_down=self.data.about_background_down,
-                       text_license=self.data.text_license,
-                       events_callback=self.on_events)
+        screen_about = self.About(events_callback=self.on_events)
         self.show_new_screen(screen_about, "About")
 
     def show_junk_files(self):
-        self.screen_junk_files = \
-            self.JunkFiles(
-                events_callback=self.on_events,
-                junk_files_items=self.data.junk_files_items,
-                background_normal=self.data.about_background_normal,
-                background_down=self.data.about_background_down)
+        self.screen_junk_files = self.JunkFiles(events_callback=self.on_events)
         self.show_new_screen(self.screen_junk_files, "JUNK FILES")
 
-        self.body_program.action_previous.app_icon = \
-            self.data.previous_app_icon_left
+        self.body_program.layouts.action_previous.app_icon = \
+            "Data/Images/arrow_left.png"
         # Запуск анимации прогресса очистки.
         self.Clock.schedule_interval(self.animation_progress_clean, 0.2)
 
@@ -36,16 +25,20 @@ class ShowScreens(object):
         """Вызывается при событии ActionPrevious в ActionBar.
         Устанавливает предыдущий и удаляет из списка текущий экран."""
 
-        if len(self.body_program.screen_manager.screens) != 1:
-            self.body_program.screen_manager.screens.pop()
+        # Если открыт экран процесса очистки.
+        if self.body_program.layouts.screen.manager.current == "JUNK_FILES":
+            self.Clock.unschedule(self.animation_progress_clean)
 
-        self.body_program.screen_manager.current = \
-            self.body_program.screen_manager.screen_names[-1]
-        self.body_program.action_previous.title = \
-            self.body_program.screen_manager.current
+        if len(self.body_program.layouts.screen_manager.screens) != 1:
+            self.body_program.layouts.screen_manager.screens.pop()
+
+        self.body_program.layouts.screen_manager.current = \
+            self.body_program.layouts.screen_manager.screen_names[-1]
+        self.body_program.layouts.action_previous.title = \
+            self.body_program.layouts.screen_manager.current
 
         # Возвращение иконки previous в actionbar.
         self.body_program.background_action_bar.rgb = \
-            self.data.actionbar_background_color
-        self.body_program.action_previous.app_icon = \
-            self.data.previous_app_icon
+            [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
+        self.body_program.layouts.action_previous.app_icon = \
+            "Data/Images/previous_app_icon.png"

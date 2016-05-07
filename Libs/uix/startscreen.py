@@ -13,8 +13,7 @@ from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.actionbar import ActionItem
 from kivy.lang import Builder
-from kivy.properties import (ObjectProperty, ListProperty, StringProperty,
-                             DictProperty)
+from kivy.properties import ObjectProperty
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -26,45 +25,8 @@ class MyOwnActionButton(Button, ActionItem):
 
 
 class StartScreen(BoxLayout):
-    today_cleaned = StringProperty("Today cleaned: 0.0B Total: 0.0B")
-
     events_callback = ObjectProperty(None)
     """Функция обработки сигналов экрана."""
-
-    name_path_buttons_menu = DictProperty({})
-    """Пути к иконкам для кнопок меню: {path: 'Name Button', ...}"""
-
-    name_item_in_spinner_list = ListProperty([])
-    """Имена пунктов кнопок меню в ActionGroup."""
-
-    item_menu_color = StringProperty("#000000")
-    """Цвет для имен пунктов меню и выпадающего списка в actionbar."""
-
-    previous_app_icon = StringProperty("")
-    """Путь к иконке для ActionPrevious."""
-
-    previous_image = StringProperty(
-        'atlas://data/images/defaulttheme/previous_normal')
-    """Путь к иконке 'Назад' для ActionPrevious."""
-
-    overflow_image = StringProperty(
-        "atlas://data/images/defaulttheme/overflow")
-    """Иконка для выпадающего списка меню."""
-
-    actionbar_background_color = \
-        ListProperty([0.1568627450980392, 0.34509803921568627,
-                      0.6784313725490196])
-    """Фон для actionbar."""
-
-    line_today_progress = StringProperty(
-        'atlas://data/images/defaulttheme/action_bar')
-    """Путь к иконке фонового изображения для line_today_progress."""
-
-    action_item_background_normal = StringProperty(
-        "atlas://data/images/defaulttheme/action_item")
-    action_item_background_down = StringProperty(
-        "atlas://data/images/defaulttheme/action_item_down")
-    """Пути к фоновым изображениям статической и нажатой кнопок ActionItem"""
 
     Builder.load_file("Libs/uix/kv/startscreen.kv")
     """Макет интерфейса"""
@@ -74,17 +36,9 @@ class StartScreen(BoxLayout):
         self.orientation = "vertical"
 
         # Инстансы виджетов из файла разметки интерфейса startscreen.kv.
-        self.action_bar = self.ids.actionbar_ID
-        self.background_action_bar = self.action_bar.canvas.children[3]
-        self.action_overflow = self.ids.actionoverflow_ID
-        self.action_previous = self.ids.actionprevious_ID
-        self.body_buttons_menu = self.ids.bodybuttonsmenu_ID
-        self.screen_manager = self.ids.screenmanager_ID
-        self.numeral_one = self.ids.numeralone_ID
-        self.numeral_two = self.ids.numeraltwo_ID
-        self.body_progress_clean = self.ids.bodyprogressclean_ID
-        self.progress_line = self.body_progress_clean.canvas.children[8]
-        self.screen = self.ids.screen_ID
+        self.layouts = self.ids
+        self.background_action_bar = self.ids.action_bar.canvas.children[3]
+        self.progress_line = self.ids.body_progress_clean.canvas.children[8]
 
         self.create_spinner_items()
         self.create_menu_buttons()
@@ -92,39 +46,31 @@ class StartScreen(BoxLayout):
     def create_spinner_items(self):
         """Создает кнопки для выпадающего списка ActionOverflow."""
 
-        for item_name in self.name_item_in_spinner_list:
+        for item_name in ["Settings", "Update", "Like Us",
+                          "Feedback", "FAQ", "About"]:
             item_button = \
                 MyOwnActionButton(
-                    text="[color={}]{}".format(
-                        self.item_menu_color, item_name), id=item_name,
-                    on_press=self.on_events, markup=True,
-                    background_normal=self.action_item_background_normal,
-                    background_down=self.action_item_background_down)
-            self.action_overflow.add_widget(item_button)
+                    text=item_name, id=item_name,
+                    on_press=self.events_callback, color=[.1, .1, .1, 1],
+                    background_normal="Data/Images/background_action_item.png",
+                    background_down="Data/Images/background_down.png")
+            self.layouts.action_overflow.add_widget(item_button)
 
     def create_menu_buttons(self):
         """Создает кнопки и подписи меню главного экрана."""
 
-        for name_button in self.name_path_buttons_menu.keys():
-            path_to_image = self.name_path_buttons_menu[name_button]
+        name_path_buttons_menu = {
+            "JUNK FILES": "Data/Images/clean_cache.png",
+            "MEMORY BOOST": "Data/Images/clean_memory.png",
+            "APP MANAGER": "Data/Images/clean_apk.png",
+            "SECURITY & PRIVACY": "Data/Images/clean_privacy.png"}
 
+        for name_button in name_path_buttons_menu.keys():
             item_box = BoxLayout(orientation="vertical")
-            item_label = \
-                Label(text="[color={}]{}".format(
-                    self.item_menu_color, name_button), markup=True)
+            item_label = Label(text=name_button, color=[.1, .1, .1, 1])
             item_button = \
-                ImageButton(source=path_to_image, id=name_button,
-                            on_press=self.on_events)
+                ImageButton(source=name_path_buttons_menu[name_button],
+                            id=name_button, on_press=self.events_callback)
             item_box.add_widget(item_button)
             item_box.add_widget(item_label)
-            self.body_buttons_menu.add_widget(item_box)
-
-    def on_events(self, instance_button_menu):
-        """Вызывается при нажатии кнопок меню программы.
-
-        :type button_menu: instance <class 'kivy.uix.button.Button'>;
-
-        """
-
-        if callable(self.events_callback):
-            self.events_callback(instance_button_menu)
+            self.layouts.body_buttons_menu.add_widget(item_box)

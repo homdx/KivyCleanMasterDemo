@@ -28,16 +28,18 @@ class AnimationProgress(object):
               220, ((self._tick * 500) / 178) + 222, 50))
 
         self._set_tick_and_numeral_progress(
-            self.body_program, self.animation_calc_storage)
+            self.body_program.layouts, self.animation_calc_storage)
 
     def animation_progress_clean(self, interval):
         if int(self._tick) == 50:
-            self.screen_junk_files.grid_layout.children[0].children[
+            self.screen_junk_files.layouts.grid_layout.children[0].children[
                0].source = "Data/Images/app_uninatall.png"
+            self.screen_junk_files.layouts.grid_layout.children[0].children[
+               0].reload()
         elif int(self._tick) == 99:
-            self.screen_junk_files.grid_layout.children[1].children[
+            self.screen_junk_files.layouts.grid_layout.children[1].children[
                0].source = "Data/Images/app_uninatall.png"
-            self.screen_junk_files.button_stop.background_normal = \
+            self.screen_junk_files.layouts.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
 
         self._r += 2
@@ -51,13 +53,13 @@ class AnimationProgress(object):
 
         # Вычисление и установка линии прогресса.
         value = ((self._tick - 8) * 100) / 100
-        self.screen_junk_files._progresline.bar_value_percent = value
-        self.screen_junk_files._progresline.redraw()
+        self.screen_junk_files.layouts.progress_line.bar_value_percent = value
+        self.screen_junk_files.layouts.progress_line.redraw()
 
-        self.screen_junk_files.progres_label.text = \
+        self.screen_junk_files.layouts.progress_label.text = \
             "Scanning: {}".format(self.package_for_clean[self._tick - 9])
         self._set_tick_and_numeral_progress(
-            self.screen_junk_files, self.animation_progress_clean)
+            self.screen_junk_files.layouts, self.animation_progress_clean)
 
     def _set_tick_and_numeral_progress(self, layout, callback):
         """
@@ -72,9 +74,9 @@ class AnimationProgress(object):
         self._tick += 1
         if self._tick == 100:
             self._tick = 9
-            self._r = self.data.core_color["R"]
-            self._g = self.data.core_color["G"]
-            self._b = self.data.core_color["B"]
+            self._r = self.core_color["R"]
+            self._g = self.core_color["G"]
+            self._b = self.core_color["B"]
 
             self.Clock.unschedule(callback)
             return
@@ -84,3 +86,4 @@ class AnimationProgress(object):
             int(numeral_one))
         layout.numeral_two.source = "Data/Images/{}.png".format(
             int(numeral_two))
+
