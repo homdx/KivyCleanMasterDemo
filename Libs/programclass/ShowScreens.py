@@ -15,9 +15,6 @@ class ShowScreens(object):
     def show_junk_files(self):
         self.screen_junk = self.JunkFiles(events_callback=self.on_events)
         self.show_new_screen(self.screen_junk, "JUNK FILES")
-
-        self.start_screen.layouts.action_previous.app_icon = \
-            "Data/Images/arrow_left.png"
         # Запуск анимации прогресса очистки.
         self.Clock.schedule_interval(self.animation_clean, 0.2)
 
