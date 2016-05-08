@@ -15,8 +15,6 @@ class ShowScreens(object):
     def show_junk_files(self):
         self.screen_junk = self.JunkFiles(events_callback=self.on_events)
         self.show_new_screen(self.screen_junk, "JUNK FILES")
-        # Запуск анимации прогресса очистки.
-        self.Clock.schedule_interval(self.animation_clean, 0.2)
 
     def back_screen(self):
         """Вызывается при событии ActionPrevious в ActionBar.
