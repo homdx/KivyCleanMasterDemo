@@ -22,15 +22,17 @@ try:
 
     Config.set("kivy", "keyboard_mode", "system")
     Config.set("kivy", "log_level", "error")
-    Config.set("graphics", "width", "400")
-    Config.set("graphics", "height", "600")
-
+    Config.set("graphics", "width", "480")
+    Config.set("graphics", "height", "720")
+    # 360x640
+    # 320x480
+    # 480x720
     from kivy.uix.rst import RstDocument
     from kivy.properties import StringProperty
 
     from Libs.uix.bugreporter import BugReporter
 except Exception:
-    print "\n\n{}".format(traceback.format_exc())
+    print("\n\n{}".format(traceback.format_exc()))
     sys.exit(1)
 
 
@@ -50,7 +52,7 @@ def main():
         app = Program()
         app.run()
     except Exception as exc:
-        print traceback.format_exc()
+        print(traceback.format_exc())
         traceback.print_exc(file=open("{}/error.log".format(
             os.path.split(os.path.abspath(sys.argv[0]))[0]), "w"))
 

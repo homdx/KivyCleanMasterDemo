@@ -5,7 +5,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 
-from custombutton import CustomButton
+from .custombutton import CustomButton
 
 
 class About(BoxLayout):

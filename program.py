@@ -14,8 +14,8 @@ try:
     from kivy.uix.screenmanager import Screen, FadeTransition
     from kivy.clock import Clock
 
-    from Libs.uix.startscreen import StartScreen
     from Libs.uix.about import About
+    from Libs.uix.startscreen import StartScreen
     from Libs.uix.junkfiles import JunkFiles
 
     from Libs.programclass import ShowScreens, AnimationProgress
@@ -32,9 +32,8 @@ class Program(App, ShowScreens, AnimationProgress):
 
     title = "Clean Master"  # заголовок окна программы
     icon = "Data/Images/logo.png"  # иконка приложения
-    core_color = {"R": 41., "G": 89., "B": 173.}
 
-    screen_junk_files = None
+    screen_junk = None
     """:class:`~Libs.uix.cleanscreen.CleanScreen`."""
 
     def __init__(self, **kvargs):
@@ -48,13 +47,16 @@ class Program(App, ShowScreens, AnimationProgress):
 
     def build(self):
         # Главный экран программы.
-        self.body_program = StartScreen(events_callback=self.on_events)
-        self.body_program.layouts.float_layout.bind(
+        self.start_screen = StartScreen(events_callback=self.on_events)
+
+        self.start_screen.layouts.float_layout.bind(
             pos=self.animation_storage_ram)
-        self.body_program.layouts.float_layout.bind(size=self.animation_storage_ram)
+        self.start_screen.layouts.float_layout.bind(
+            size=self.animation_storage_ram)
+
         # Запуск анимации прогресса подсчета STORAGE/RAM.
-        Clock.schedule_interval(self.calc_elliptical_length, 0.05)
-        return self.body_program
+        Clock.schedule_interval(self.calc_elliptical_length, .05)
+        return self.start_screen
 
     def on_events(self, *args):
         """Обработчик событий приложения."""
@@ -71,7 +73,7 @@ class Program(App, ShowScreens, AnimationProgress):
         elif event == "JUNK FILES":
             self.show_junk_files()
         elif event == "STOP":
-            Clock.unschedule(self.animation_progress_clean)
+            Clock.unschedule(self.animation_clean)
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""
@@ -79,7 +81,7 @@ class Program(App, ShowScreens, AnimationProgress):
         screen = Screen(name=string_name_screen)
         screen.add_widget(instance_new_screen)
 
-        self.body_program.layouts.screen_manager.add_widget(screen)
-        self.body_program.layouts.screen.manager.transition = FadeTransition()
-        self.body_program.layouts.screen.manager.current = string_name_screen
-        self.body_program.layouts.action_previous.title = string_name_screen
+        self.start_screen.layouts.screen_manager.add_widget(screen)
+        self.start_screen.layouts.screen.manager.transition = FadeTransition()
+        self.start_screen.layouts.screen.manager.current = string_name_screen
+        self.start_screen.layouts.action_previous.title = string_name_screen
