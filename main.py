@@ -24,9 +24,9 @@ try:
     Config.set("kivy", "log_level", "error")
     Config.set("graphics", "width", "480")
     Config.set("graphics", "height", "720")
-    # 360x640
-    # 320x480
-    # 480x720
+    # 360 x 640
+    # 320 x 480
+    # 480 x 720
     from kivy.uix.rst import RstDocument
     from kivy.properties import StringProperty
 

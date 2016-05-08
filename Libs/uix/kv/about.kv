@@ -40,15 +40,16 @@
                 size_hint_y: None
                 height: self.minimum_height
 
-                # Текст лицензии
+            # Текст лицензии
             Label:
                 text:
                     open("LICENSE").read() if exists("LICENSE") else \
                     "Demo Clean Master"
-                text_size: self.size[0], None
+                text_size: self.size
                 font_size: "10pt"
+                valign: "top"
                 size_hint_y: None
-                height: root.height / 1.8
+                height: root.height / 2.5
                 color: 0.1, 0.1, 0.1, 1
 
     # Бокс копирайта

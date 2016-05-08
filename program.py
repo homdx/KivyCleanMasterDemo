@@ -72,6 +72,8 @@ class Program(App, ShowScreens, AnimationProgress):
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":
             self.show_junk_files()
+            # Запуск анимации прогресса очистки.
+            self.Clock.schedule_interval(self.animation_clean, 0.2)
         elif event == "STOP":
             Clock.unschedule(self.animation_clean)
 
@@ -85,3 +87,6 @@ class Program(App, ShowScreens, AnimationProgress):
         self.start_screen.layouts.screen.manager.transition = FadeTransition()
         self.start_screen.layouts.screen.manager.current = string_name_screen
         self.start_screen.layouts.action_previous.title = string_name_screen
+
+        self.start_screen.layouts.action_previous.app_icon = \
+            "Data/Images/arrow_left.png"
