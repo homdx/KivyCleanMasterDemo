@@ -37,6 +37,7 @@ class About(BoxLayout):
 
         for name_item in about_items_share.keys():
                 box_share.add_widget(
-                    CustomButton(icon=about_items_share[name_item],
+                    CustomButton(icon_load="Data/Images/previous_image.png",
+                                 icon=about_items_share[name_item],
                                  button_text=name_item, button_height=45,
                                  icon_height=25))

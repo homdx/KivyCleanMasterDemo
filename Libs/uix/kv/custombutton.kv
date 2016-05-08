@@ -1,6 +1,7 @@
 #:kivy 1.9.1
 
 <CustomButton@Button>
+    id: root.id
     text: root.button_text
     background_normal: "Data/Images/background_action_item.png"
     background_down: "Data/Images/background_down.png"
@@ -19,7 +20,7 @@
         #root.y + self.height / 2
     # Иконка прогресса очистки
     Image:
-        source: "Data/Images/loading.gif"
+        source: root.icon_load
         size_hint_y: None
         pos: root.width / 2 - 25, root.y
         size: root.size

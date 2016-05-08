@@ -40,13 +40,22 @@ class AnimationProgress(object):
 
     def animation_clean(self, interval):
         if int(self.tick) == 50:
+            #print self.screen_junk.layouts.grid_layout.ids
             self.screen_junk.layouts.grid_layout.children[0].children[
                 0].source = "Data/Images/app_uninatall.png"
+            #self.screen_junk.layouts.grid_layout.children[0].children[
+            #    0].reload()
         elif int(self.tick) == 99:
-            self.screen_junk.layouts.grid_layout.children[1].children[
+            self.screen_junk.layouts.grid_layout.children[1].remove_widget(
+                self.screen_junk.layouts.grid_layout.children[1].children[0])
+
+            '''self.screen_junk.layouts.grid_layout.children[1].children[
                 0].source = "Data/Images/app_uninatall.png"
             self.screen_junk.layouts.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
+            self.screen_junk.layouts.button_stop.text = \
+                "CLEAN JUNK {}MB".format(self.tick)
+            self.screen_junk.layouts.button_stop.color = [1.0, 1.0, 1.0, 1]'''
 
         new_color = self.set_new_color()
         self.screen_junk._background.rgb = new_color

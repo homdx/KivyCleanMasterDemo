@@ -42,5 +42,5 @@ class JunkFiles(BoxLayout):
         for action_clean in junk_files_items.keys():
             path_to_icon_action = junk_files_items[action_clean]
             self.layouts.grid_layout.add_widget(
-                CustomButton(icon=path_to_icon_action,
+                CustomButton(id=action_clean, icon=path_to_icon_action,
                              button_text=action_clean))

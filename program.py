@@ -76,6 +76,7 @@ class Program(App, ShowScreens, AnimationProgress):
             self.Clock.schedule_interval(self.animation_clean, 0.2)
         elif event == "STOP":
             Clock.unschedule(self.animation_clean)
+            self.back_screen()
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""
