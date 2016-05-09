@@ -4,15 +4,13 @@
 # AnimationProgress.py
 #
 
-import os
-
 
 class AnimationProgress(object):
     """Анимации прогрессов приложения."""
 
     def __init__(self):
         self.set_default_tick_rgb()
-        self.scan_packages = os.listdir(os.path.split(os.__file__)[0])
+        self.scan_packages = range(100)
 
     def animation_storage_ram(self, *args):
         """Анимация эллипсов прогресса STORAGE/RAM."""
@@ -46,16 +44,13 @@ class AnimationProgress(object):
             #self.screen_junk.layouts.grid_layout.children[0].children[
             #    0].reload()
         elif int(self.tick) == 99:
-            self.screen_junk.layouts.grid_layout.children[1].remove_widget(
-                self.screen_junk.layouts.grid_layout.children[1].children[0])
-
-            '''self.screen_junk.layouts.grid_layout.children[1].children[
+            self.screen_junk.layouts.grid_layout.children[1].children[
                 0].source = "Data/Images/app_uninatall.png"
             self.screen_junk.layouts.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
             self.screen_junk.layouts.button_stop.text = \
                 "CLEAN JUNK {}MB".format(self.tick)
-            self.screen_junk.layouts.button_stop.color = [1.0, 1.0, 1.0, 1]'''
+            self.screen_junk.layouts.button_stop.color = [1.0, 1.0, 1.0, 1]
 
         new_color = self.set_new_color()
         self.screen_junk._background.rgb = new_color
@@ -66,8 +61,8 @@ class AnimationProgress(object):
         self.screen_junk.layouts.progress_line.bar_value_percent = value
         self.screen_junk.layouts.progress_line.redraw()
 
-        self.screen_junk.layouts.progress_label.text = "Scanning: {}".format(
-            self.scan_packages[self.tick])
+        self.screen_junk.layouts.progress_label.text = \
+            "Scanning: org.package {}".format(self.scan_packages[self.tick])
         self.animation_percent(
             self.screen_junk.layouts, self.animation_clean, iteration=100)
 
