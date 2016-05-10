@@ -43,4 +43,5 @@ class JunkFiles(BoxLayout):
             path_to_icon_action = junk_files_items[action_clean]
             self.layouts.grid_layout.add_widget(
                 CustomButton(id=action_clean, icon=path_to_icon_action,
-                             button_text=action_clean))
+                             button_text=action_clean,
+                             on_press=self.events_callback))

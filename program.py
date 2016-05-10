@@ -11,6 +11,7 @@ try:
     kivy.require("1.9.1")
 
     from kivy.app import App
+    from kivy.uix.button import Button
     from kivy.uix.screenmanager import Screen, FadeTransition
     from kivy.clock import Clock
 
@@ -78,6 +79,9 @@ class Program(App, ShowScreens, AnimationProgress):
         elif event == "STOP":
             Clock.unschedule(self.animation_clean)
             self.back_screen()
+        elif event == "Memory boost":
+            self.screen_junk.layouts.grid_layout.add_widget(
+                Button(size_hint_y=None, pos=(50, 100)))
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""
