@@ -1,5 +1,4 @@
 #:kivy 1.9.1
-#:import exists os.path.exists
 
 <About>:
     orientation: "vertical"
@@ -42,9 +41,7 @@
 
             # Текст лицензии
             Label:
-                text:
-                    open("LICENSE").read() if exists("LICENSE") else \
-                    "Demo Clean Master"
+                text: root.text_license
                 text_size: self.size
                 font_size: "10pt"
                 valign: "top"

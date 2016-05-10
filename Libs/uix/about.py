@@ -3,7 +3,7 @@
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 
 from .custombutton import CustomButton
 
@@ -11,6 +11,8 @@ from .custombutton import CustomButton
 class About(BoxLayout):
     events_callback = ObjectProperty(None)
     """Функция обработки сигналов экрана."""
+
+    text_license = StringProperty("Clean Master")
 
     Builder.load_file("Libs/uix/kv/about.kv")
     Builder.load_file("Libs/uix/kv/custombutton.kv")

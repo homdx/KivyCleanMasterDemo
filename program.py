@@ -80,8 +80,9 @@ class Program(App, ShowScreens, AnimationProgress):
             Clock.unschedule(self.animation_clean)
             self.back_screen()
         elif event == "Memory boost":
-            self.screen_junk.layouts.grid_layout.add_widget(
-                Button(size_hint_y=None, pos=(50, 100)))
+            #self.screen_junk.layouts.grid_layout.add_widget(
+            #    Button(size_hint_y=None, pos=(50, 100)))
+            pass
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""

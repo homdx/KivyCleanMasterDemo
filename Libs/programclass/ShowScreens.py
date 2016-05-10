@@ -9,7 +9,13 @@ class ShowScreens(object):
     """Выводит новые экраны."""
 
     def show_about(self):
-        screen_about = self.About(events_callback=self.on_events)
+        try:
+            text_license = open("{}/LICENSE".format(self.prog_dir)).read()
+        except Exception:
+            text_license = "Clean Master"
+
+        screen_about = \
+            self.About(events_callback=self.on_events,  text_license=text_license)
         self.show_new_screen(screen_about, "About")
 
     def show_junk_files(self):
