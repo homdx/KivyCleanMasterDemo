@@ -23,7 +23,7 @@ python main.py
 
 Если все библиотеки и зависимости установлены, вы увидите данный экран:
 
-![ScreenShot](https://raw.github.com/kivy/kivy-designer/master/kivy_designer.png)
+![ScreenShot](https://raw.githubusercontent.com/HeaTTheatR/KivyCleanMasterDemo/master/Data/Images/screenshot.jpg)
 
 ВЕРСИЯ
 ------
