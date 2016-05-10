@@ -12,7 +12,7 @@ try:
 
     from kivy.app import App
     from kivy.uix.button import Button
-    from kivy.uix.screenmanager import Screen, FadeTransition1
+    from kivy.uix.screenmanager import Screen, FadeTransition
     from kivy.clock import Clock
 
     from Libs.uix.about import About
