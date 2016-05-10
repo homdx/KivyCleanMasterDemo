@@ -54,7 +54,10 @@ class StartScreen(BoxLayout):
                     text=item_name, id=item_name,
                     on_press=self.events_callback, color=[.1, .1, .1, 1],
                     background_normal="Data/Images/background_action_item.png",
-                    background_down="Data/Images/background_down.png")
+                    background_down="Data/Images/background_down.png",
+                    on_release=lambda *args:
+                        self.layouts.action_overflow._dropdown.select(
+                            self.on_release_select_item_spinner()))
             self.layouts.action_overflow.add_widget(item_button)
 
     def create_menu_buttons(self):
@@ -75,3 +78,6 @@ class StartScreen(BoxLayout):
             item_box.add_widget(item_button)
             item_box.add_widget(item_label)
             self.layouts.body_buttons_menu.add_widget(item_box)
+
+    def on_release_select_item_spinner(self):
+        pass
