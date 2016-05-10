@@ -20,10 +20,10 @@ try:
     from kivy.app import App
     from kivy.config import Config
 
-    # Config.set("kivy", "keyboard_mode", "system")
-    # Config.set("kivy", "log_level", "error")
-    # Config.set("graphics", "width", "480")
-    # Config.set("graphics", "height", "720")
+    Config.set("kivy", "keyboard_mode", "system")
+    Config.set("kivy", "log_level", "error")
+    Config.set("graphics", "width", "480")
+    Config.set("graphics", "height", "720")
     # 360 x 640
     # 320 x 480
     # 480 x 720

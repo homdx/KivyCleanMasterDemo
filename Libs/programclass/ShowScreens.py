@@ -20,9 +20,14 @@ class ShowScreens(object):
         """Вызывается при событии ActionPrevious в ActionBar.
         Устанавливает предыдущий и удаляет из списка текущий экран."""
 
+        current_screen = self.start_screen.layouts.screen.manager.current
+
         # Если открыт экран процесса очистки.
-        if self.start_screen.layouts.screen.manager.current == "JUNK FILES":
+        if current_screen == "JUNK FILES":
             self.Clock.unschedule(self.animation_clean)
+
+        if current_screen in ["About", "JUNK FILES"]:
+            self.Clock.schedule_interval(self.calc_elliptical_length, .05)
 
         if len(self.start_screen.layouts.screen_manager.screens) != 1:
             self.start_screen.layouts.screen_manager.screens.pop()
@@ -30,7 +35,7 @@ class ShowScreens(object):
         self.start_screen.layouts.screen_manager.current = \
             self.start_screen.layouts.screen_manager.screen_names[-1]
         self.start_screen.layouts.action_previous.title = \
-            self.start_screen.layouts.screen_manager.current
+            self.start_screen.layouts.screen.manager.current
 
         # Возвращение иконки previous в actionbar.
         self.start_screen.background_action_bar.rgb = \

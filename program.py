@@ -62,6 +62,7 @@ class Program(App, ShowScreens, AnimationProgress):
         """Обработчик событий приложения."""
 
         event = args[0] if isinstance(args[0], str) else args[0].id
+        print event
 
         # -------------------------------ABOUT---------------------------------
         if event == "About":
@@ -88,6 +89,5 @@ class Program(App, ShowScreens, AnimationProgress):
         self.start_screen.layouts.screen.manager.transition = FadeTransition()
         self.start_screen.layouts.screen.manager.current = string_name_screen
         self.start_screen.layouts.action_previous.title = string_name_screen
-
         self.start_screen.layouts.action_previous.app_icon = \
             "Data/Images/arrow_left.png"
