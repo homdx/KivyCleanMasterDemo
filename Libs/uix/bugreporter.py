@@ -38,14 +38,12 @@
 #
 
 import os
-import traceback
 
 try:
-    from kivy.core.clipboard import Clipboard
     from kivy.lang import Builder
-    from kivy.properties import (ObjectProperty, BooleanProperty,
-                                 StringProperty)
     from kivy.uix.floatlayout import FloatLayout
+    from kivy.uix.button import Button
+    from kivy.properties import ObjectProperty, BooleanProperty, StringProperty
 except Exception as text_error:
     raise text_error
 
@@ -58,15 +56,14 @@ class BugReporter(FloatLayout):
     title = "Bug reporter"
     label_info_for_user = StringProperty("Sorry, an error occurred in the "
                                          "program!")
-
     info_for_user = StringProperty("You can report this bug using"
                                    "the button bellow, helping us to fix it.")
-    """Информация пользователю для дальнейших действий"""
-
     txt_report = StringProperty("")
-    """Текст ошибки"""
 
-    send_report_callback = ObjectProperty(p)
+    callback_clipboard = ObjectProperty(None)
+    """Функция копирования баг-репорта в буфер обмена"""
+
+    callback_report = ObjectProperty(None)
     """Функция отправки баг-репорта"""
 
     report_readonly = BooleanProperty(False)
@@ -75,9 +72,9 @@ class BugReporter(FloatLayout):
     icon_background = StringProperty("data/logo/kivy-icon-256.png")
     """Фоновое изображение окна"""
 
-    txt_button_clipboard = "Copy to clipboard"
-    txt_button_report = "Report Bug"
-    txt_button_close = "Close"
+    txt_button_clipboard = StringProperty("Copy Bug")
+    txt_button_report = StringProperty("Report Bug")
+    txt_button_close = StringProperty("Close")
     """Подписи кнопок"""
 
     Builder.load_file("Libs/uix/kv/bugreporter.kv")
@@ -89,47 +86,14 @@ class BugReporter(FloatLayout):
         if not os.path.exists(self.icon_background):
             self.icon_background = "data/logo/kivy-icon-256.png"
 
-    def on_clipboard(self, *args):
-        """Event handler to "Copy to Clipboard" button"""
+        name_funcs_buttons = {self.txt_button_clipboard: self.callback_clipboard,
+                              self.txt_button_report: self.callback_report}
 
-        Clipboard.copy(self.txt_traceback.text)
-
-    def on_report(self, *args):
-        """Event handler to "Report Bug" button"""
-
-        pass
+        for name_button in name_funcs_buttons.keys():
+            if callable(name_funcs_buttons[name_button]):
+                self.ids.box_layout.add_widget(
+                    Button(text=name_button, on_press=name_funcs_buttons[name_button]))
 
     def on_close(self, *args):
-        """Event handler to "Close" button"""
-
         from kivy.app import App
-
         App.get_running_app().stop()
-
-
-if __name__ in ["__main__", "__android__"]:
-    import webbrowser
-    import six.moves.urllib
-
-    import kivy
-    kivy.require("1.9.1")
-    from kivy.app import App
-
-
-    class Test(App):
-        def send_report_callback(self, *args):
-            """Функция отправки баг-репорта"""
-
-            txt = six.moves.urllib.parse.quote(
-                self.win_report.report.txt_traceback.text.encode("utf-8"))
-            url = "https://github.com/HeaTTheatR/HeaTDV4A/issues/new?body=" \
-                  + txt
-            webbrowser.open(url)
-
-        def build(self):
-            self.win_report = \
-                BugReporter(send_report_callback=self.send_report_callback,
-                            txt_report=traceback.format_exc())
-            return self.win_report
-
-    Test().run()

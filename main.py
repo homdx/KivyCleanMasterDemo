@@ -28,9 +28,6 @@ try:
     # 320 x 480
     # 480 x 720
     # 1920 x 1080
-    from kivy.uix.rst import RstDocument
-    from kivy.properties import StringProperty
-
     from Libs.uix.bugreporter import BugReporter
 except Exception:
     print "\n\n{}".format(traceback.format_exc())
@@ -58,35 +55,30 @@ def main():
             os.path.split(os.path.abspath(sys.argv[0]))[0]), "w"))
 
         # Вывод окна с текстом ошибки.
-        try:
-            class Error(App):
-                def send_report_callback(self, *args):
-                    """Функция отправки баг-репорта"""
+        class Error(App):
+            def callback_report(self, *args):
+                """Функция отправки баг-репорта"""
 
-                    pass
+                try:
+                    import webbrowser
+                    import six.moves.urllib
 
-                def build(self):
-                    win_report = BugReporter(
-                        send_report_callback=self.send_report_callback,
-                        txt_report=str(exc), icon_background=os.path.split(
-                            __file__)[0] + "data/logo/kivy-icon-256.png")
-                    return win_report
+                    txt = six.moves.urllib.parse.quote(
+                        self.win_report.txt_traceback.text.encode(
+                            "utf-8"))
+                    url = "https://github.com/HeaTTheatR/KivyCleanMasterDemo" \
+                          "/issues/new?body=" + txt
+                    webbrowser.open(url)
+                except Exception:
+                    sys.exit(1)
 
-            Error().run()
-        except:
-            class Error(App):
-                def build(self):
-                    text_error = \
-                        string_lang_error_start_program.format(
-                            str(exc).replace(
-                                "Traceback (most recent call last):",
-                                ".. warning ::\n"
-                                " Traceback (most recent call last)::\n"
-                            ).replace("Exception: ", ""),
-                            "{}/error.log".format(__file__))
-                    return RstDocument(text=text_error)
+            def build(self):
+                self.win_report = BugReporter(
+                    callback_report=self.callback_report, txt_report=str(exc),
+                    icon_background="Data/Images/logo.png")
+                return self.win_report
 
-            Error().run()
+        Error().run()
 
 
 if __name__ in ["__main__", "__android__"]:
