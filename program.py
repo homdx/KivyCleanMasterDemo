@@ -56,7 +56,7 @@ class Program(App, ShowScreens, AnimationProgress):
             size=self.animation_storage_ram)
 
         # Запуск анимации прогресса подсчета STORAGE/RAM.
-        Clock.schedule_interval(self.calc_elliptical_length, .05)
+        Clock.schedule_interval(self.calc_elliptical_length, .03)
         return self.start_screen
 
     def on_events(self, *args):

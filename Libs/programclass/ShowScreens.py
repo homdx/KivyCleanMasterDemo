@@ -33,7 +33,7 @@ class ShowScreens(object):
             self.Clock.unschedule(self.animation_clean)
 
         if current_screen in ["About", "JUNK FILES"]:
-            self.Clock.schedule_interval(self.calc_elliptical_length, .05)
+            self.Clock.schedule_interval(self.calc_elliptical_length, .03)
 
         if len(self.start_screen.layouts.screen_manager.screens) != 1:
             self.start_screen.layouts.screen_manager.screens.pop()
