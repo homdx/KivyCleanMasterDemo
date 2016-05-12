@@ -11,8 +11,6 @@ import os
 import sys
 import traceback
 
-sys.dont_write_bytecode = True
-
 try:
     import kivy
     kivy.require("1.9.1")
@@ -20,8 +18,8 @@ try:
     from kivy.app import App
     from kivy.config import Config
 
-    Config.set("kivy", "keyboard_mode", "system")
-    Config.set("kivy", "log_level", "error")
+    # Config.set("kivy", "keyboard_mode", "system")
+    # Config.set("kivy", "log_level", "error")
     # Config.set("graphics", "width", "480")
     # Config.set("graphics", "height", "720")
     # 360 x 640
@@ -35,12 +33,6 @@ except Exception:
 
 
 __version__ = "0.0.1"
-
-string_lang_error_start_program = \
-    "Failure:\n" \
-    "==========================\n" \
-    "{}\n\n" \
-    "Full log in file - \n**[color=ff3232]{}**"
 
 
 def main():
@@ -81,5 +73,5 @@ def main():
         Error().run()
 
 
-if __name__ in ["__main__", "__android__"]:
+if __name__ in ("__main__", "__android__"):
     main()

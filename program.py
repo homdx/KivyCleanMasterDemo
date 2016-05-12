@@ -52,6 +52,8 @@ class Program(App, ShowScreens, AnimationProgress):
         # Главный экран программы.
         self.start_screen = StartScreen(events_callback=self.on_events)
 
+        # Привязываем layout на изменение размеров экрана приложения
+        # к функции отрисовки эллипсов прогресса.
         self.start_screen.layouts.float_layout.bind(
             pos=self.animation_storage_ram)
         self.start_screen.layouts.float_layout.bind(
@@ -74,7 +76,7 @@ class Program(App, ShowScreens, AnimationProgress):
         # -------------------------------ABOUT---------------------------------
         if event == "About":
             self.show_about()
-        # ----------------ACTION BAR или BACKSPACE ON DEVICE-------------------
+        # ----------------ACTION BAR или BACKSPACE на девайсе------------------
         elif event == "on_previous" or event == 27:
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
