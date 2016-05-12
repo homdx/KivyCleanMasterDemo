@@ -52,9 +52,10 @@ class AnimationProgress(object):
                 "CLEAN JUNK {}MB".format(self.tick)
             self.screen_junk.layouts.button_stop.color = [1.0, 1.0, 1.0, 1]
 
-        new_color = self.set_new_color()
-        self.screen_junk._background.rgb = new_color
-        self.start_screen.background_action_bar.rgb = new_color
+        #new_color = \
+        self.set_new_color()
+        self.screen_junk._background.rgb = self.new_color
+        self.start_screen.background_action_bar.rgb = self.new_color
 
         # Вычисление и установка линии прогресса.
         value = (self.tick * 100) / 100
@@ -118,6 +119,6 @@ class AnimationProgress(object):
         self.R += 2
         self.G += 1
         self.B -= 1
-        new_color = self.R / 255., self.R / 255., self.B / 255.
+        self.new_color = self.R / 255., self.R / 255., self.B / 255.
 
-        return new_color
+        #return new_color
