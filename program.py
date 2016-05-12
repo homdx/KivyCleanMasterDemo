@@ -14,6 +14,7 @@ try:
     from kivy.uix.button import Button
     from kivy.uix.screenmanager import Screen, FadeTransition
     from kivy.clock import Clock
+    from kivy.core.window import Window
 
     from Libs.uix.about import About
     from Libs.uix.startscreen import StartScreen
@@ -39,6 +40,7 @@ class Program(App, ShowScreens, AnimationProgress):
 
     def __init__(self, **kvargs):
         super(Program, self).__init__(**kvargs)
+        Window.bind(on_keyboard=self.on_events)
 
         # Для области видимомти в пакете programclass.
         self.About = About
@@ -62,14 +64,18 @@ class Program(App, ShowScreens, AnimationProgress):
     def on_events(self, *args):
         """Обработчик событий приложения."""
 
-        event = args[0] if isinstance(args[0], str) else args[0].id
-        print event
+        try:
+            # События приложения.
+            event = args[0] if isinstance(args[0], str) else args[0].id
+        except AttributeError:
+            # События клавиатуры, кнопок девайса.
+            event = args[1]
 
         # -------------------------------ABOUT---------------------------------
         if event == "About":
             self.show_about()
-        # ----------------------------ACTION BAR-------------------------------
-        elif event == "on_previous":
+        # ----------------ACTION BAR или BACKSPACE ON DEVICE-------------------
+        elif event == "on_previous" or event == 27:
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":
@@ -79,10 +85,6 @@ class Program(App, ShowScreens, AnimationProgress):
         elif event == "STOP":
             Clock.unschedule(self.animation_clean)
             self.back_screen()
-        elif event == "Memory boost":
-            #self.screen_junk.layouts.grid_layout.add_widget(
-            #    Button(size_hint_y=None, pos=(50, 100)))
-            pass
 
     def show_new_screen(self, instance_new_screen, string_name_screen):
         """Устанавливает новый экран."""
