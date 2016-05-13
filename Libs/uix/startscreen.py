@@ -62,7 +62,7 @@ class StartScreen(BoxLayout):
             self._action_overflow.add_widget(item_button)
 
     def create_menu_buttons(self):
-        """Создает кнопки и подписи меню главного экрана."""
+        """Создает кнопки и подписи меню."""
 
         name_path_buttons_menu = {
             "JUNK FILES": "Data/Images/clean_cache.png",
