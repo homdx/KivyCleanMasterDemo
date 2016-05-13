@@ -77,7 +77,7 @@ class Program(App, ShowScreens, AnimationProgress):
         # -------------------------------ABOUT---------------------------------
         if event == "About":
             self.show_about()
-        # ----------------ACTION BAR или BACKSPACE на девайсе------------------
+        # ------------------ACTION BAR или BackKey на девайсе------------------
         elif event == "on_previous" or event == 27:
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
