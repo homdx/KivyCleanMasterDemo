@@ -8,6 +8,9 @@
 class ShowScreens(object):
     """Выводит новые экраны."""
 
+    background_action_bar = \
+        [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
+
     def show_about(self):
         try:
             text_license = open("{}/LICENSE".format(self.prog_dir)).read()
@@ -17,7 +20,7 @@ class ShowScreens(object):
         if self.start_screen.layouts.screen.manager.current == "JUNK FILES":
             self.Clock.unschedule(self.animation_clean)
             self.start_screen.background_action_bar.rgb = \
-                [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
+                self.background_action_bar
 
         screen_about = \
             self.About(events_callback=self.on_events,  text_license=text_license)
@@ -32,7 +35,6 @@ class ShowScreens(object):
         Устанавливает предыдущий и удаляет из списка текущий экран."""
 
         current_screen = self.start_screen.layouts.screen.manager.current
-        print current_screen
 
         # Если открыт экран процесса очистки.
         if current_screen == "JUNK FILES":
@@ -49,13 +51,13 @@ class ShowScreens(object):
         self.start_screen.layouts.action_previous.title = \
             self.start_screen.layouts.screen.manager.current
 
-        if current_screen != "About":
+        if current_screen == "About":
+            print self.new_color
+            self.start_screen.background_action_bar.rgb = self.new_color
+            self.new_color = self.background_action_bar
+        else:
             # Возвращение иконки previous в actionbar.
             self.start_screen.background_action_bar.rgb = \
-                [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
-        else:
-            self.start_screen.background_action_bar.rgb = self.new_color
-            self.new_color = \
-                [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
+                self.background_action_bar
         self.start_screen.layouts.action_previous.app_icon = \
             "Data/Images/previous_app_icon.png"

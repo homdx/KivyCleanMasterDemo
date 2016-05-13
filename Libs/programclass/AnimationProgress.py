@@ -62,6 +62,7 @@ class AnimationProgress(object):
         self.screen_junk.layouts.progress_line.bar_value_percent = value
         self.screen_junk.layouts.progress_line.redraw()
 
+        print self.tick
         self.screen_junk.layouts.progress_label.text = \
             "Scanning: org.package {}".format(self.scan_packages[self.tick])
         self.animation_percent(

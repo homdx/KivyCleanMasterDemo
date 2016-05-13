@@ -78,6 +78,7 @@ class Program(App, ShowScreens, AnimationProgress):
             self.show_about()
         # ----------------ACTION BAR или BACKSPACE на девайсе------------------
         elif event == "on_previous" or event == 27:
+            print "press BACKSPACE"
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":

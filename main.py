@@ -11,6 +11,8 @@ import os
 import sys
 import traceback
 
+sys.dont_write_bytecode = True
+
 try:
     import kivy
     kivy.require("1.9.1")
@@ -36,6 +38,8 @@ __version__ = "0.0.1"
 
 
 def main():
+    app = None
+
     try:
         from program import Program  # основной класс программы
 
@@ -45,6 +49,9 @@ def main():
         print traceback.format_exc()
         traceback.print_exc(file=open("{}/error.log".format(
             os.path.split(os.path.abspath(sys.argv[0]))[0]), "w"))
+
+        if app:  # очищаем экран приложения от всех виджетов
+            app.start_screen.clear_widgets()
 
         # Вывод окна с текстом ошибки.
         class Error(App):
