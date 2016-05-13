@@ -57,10 +57,8 @@ class Program(App, ShowScreens, AnimationProgress):
 
         # Привязываем layout на изменение размеров экрана приложения
         # к функции отрисовки эллипсов прогресса.
-        self.start_screen.layouts.float_layout.bind(
-            pos=self.animation_storage_ram)
-        self.start_screen.layouts.float_layout.bind(
-            size=self.animation_storage_ram)
+        self.start_screen.body_storage_ram.bind(pos=self.animation_storage_ram)
+        self.start_screen.body_storage_ram.bind(size=self.animation_storage_ram)
 
         # Запуск анимации прогресса подсчета STORAGE/RAM.
         Clock.schedule_interval(self.calc_elliptical_length, .03)
