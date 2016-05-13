@@ -32,6 +32,7 @@ class ShowScreens(object):
         self.show_new_screen(screen_about, "About")
 
     def show_junk_files(self):
+        self.set_default_tick_rgb()
         self.screen_junk = self.JunkFiles(events_callback=self.on_events)
         self.show_new_screen(self.screen_junk, "JUNK FILES")
 
@@ -41,12 +42,13 @@ class ShowScreens(object):
 
         current_screen = self.start_screen.screen_manager.current
 
-        # Если открыт экран процесса очистки, останавливаем процесс анимации.
-        if current_screen == "JUNK FILES":
-            self.Clock.unschedule(self.animation_clean)
-
-        # Если возвращаемся на главный экран, запускаем анимацию подсчета RAM.
-        elif current_screen in ("About", "JUNK FILES"):
+        if current_screen in ("About", "JUNK FILES"):
+            # Если открыт экран процесса очистки, останавливаем
+            # процесс анимации.
+            if current_screen == "JUNK FILES":
+                self.Clock.unschedule(self.animation_clean)
+            # Если возвращаемся на главный экран, запускаем анимацию
+            # подсчета STORAGE/RAM.
             self.Clock.schedule_interval(self.calc_elliptical_length, .03)
 
         if len(self.start_screen.screen_manager.screens) != 1:

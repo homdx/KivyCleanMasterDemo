@@ -83,6 +83,8 @@ class Program(App, ShowScreens, AnimationProgress):
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":
             self.show_junk_files()
+            # Прерываем анимацию подсчета STORAGE/RAM.
+            self.Clock.unschedule(self.calc_elliptical_length)
             # Запуск анимации прогресса очистки.
             self.Clock.schedule_interval(self.animation_clean, 0.2)
         elif event == "STOP":
