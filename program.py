@@ -47,6 +47,8 @@ class Program(App, ShowScreens, AnimationProgress):
         self.Clock = Clock
         self.JunkFiles = JunkFiles
         self.prog_dir = self.directory
+        self.new_color = \
+            [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
 
     def build(self):
         # Главный экран программы.
@@ -78,7 +80,6 @@ class Program(App, ShowScreens, AnimationProgress):
             self.show_about()
         # ----------------ACTION BAR или BACKSPACE на девайсе------------------
         elif event == "on_previous" or event == 27:
-            print "press BACKSPACE"
             self.back_screen()
         # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
         elif event == "JUNK FILES":
@@ -89,15 +90,22 @@ class Program(App, ShowScreens, AnimationProgress):
             Clock.unschedule(self.animation_clean)
             self.back_screen()
 
-    def show_new_screen(self, instance_new_screen, string_name_screen):
+    def show_new_screen(self, instance_new_screen, string_new_name_screen):
         """Устанавливает новый экран."""
 
-        screen = Screen(name=string_name_screen)
+        # Если пытаются открыть один и тот же экран, например, About в About.
+        name_current_screen = self.start_screen.layouts.screen.manager.current
+        if name_current_screen == string_new_name_screen:
+            return
+
+        screen = Screen(name=string_new_name_screen)
         screen.add_widget(instance_new_screen)
 
         self.start_screen.layouts.screen_manager.add_widget(screen)
         self.start_screen.layouts.screen.manager.transition = FadeTransition()
-        self.start_screen.layouts.screen.manager.current = string_name_screen
-        self.start_screen.layouts.action_previous.title = string_name_screen
+        self.start_screen.layouts.screen.manager.current = \
+            string_new_name_screen
+        self.start_screen.layouts.action_previous.title = \
+            string_new_name_screen
         self.start_screen.layouts.action_previous.app_icon = \
             "Data/Images/arrow_left.png"

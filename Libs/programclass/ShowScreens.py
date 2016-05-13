@@ -23,7 +23,7 @@ class ShowScreens(object):
                 self.background_action_bar
 
         screen_about = \
-            self.About(events_callback=self.on_events,  text_license=text_license)
+            self.About(events_callback=self.on_events, text_license=text_license)
         self.show_new_screen(screen_about, "About")
 
     def show_junk_files(self):
@@ -52,7 +52,6 @@ class ShowScreens(object):
             self.start_screen.layouts.screen.manager.current
 
         if current_screen == "About":
-            print self.new_color
             self.start_screen.background_action_bar.rgb = self.new_color
             self.new_color = self.background_action_bar
         else:
