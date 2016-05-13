@@ -23,14 +23,18 @@ class JunkFiles(BoxLayout):
 
     def __init__(self, **kvargs):
         super(JunkFiles, self).__init__(**kvargs)
-
-        # Объекты виждетов Image - циферблат прогресса очистки.
-        self.layouts = self.ids
-        self._background = self.ids.float_layout.canvas.children[0]
-
-        self.layouts.button_stop.bind(
-            on_press=lambda *args: self.events_callback("STOP"))
         self.create_custom_button()
+
+        # Виждеты экрана очистки.
+        self.layouts = self.ids
+        self.button_memory_bust = self.layouts.grid_layout.children[0]
+        self.button_cache_junk = self.layouts.grid_layout.children[1]
+        self.button_memory_bust_icon_state = self.button_memory_bust.children[0]
+        self.button_cache_junk_icon_state = self.button_cache_junk.children[0]
+        self.progress_line = self.layouts.progress_line
+        self.progress_label = self.layouts.progress_label
+        self.button_stop = self.layouts.button_stop
+        self.background = self.ids.float_layout.canvas.children[0]
 
     def create_custom_button(self):
         """Создает список кнопок с именем и иконкой действий очистки."""
@@ -40,7 +44,9 @@ class JunkFiles(BoxLayout):
 
         for action_clean in junk_files_items.keys():
             path_to_icon_action = junk_files_items[action_clean]
-            self.layouts.grid_layout.add_widget(
+            self.ids.grid_layout.add_widget(
                 CustomButton(id=action_clean, icon=path_to_icon_action,
                              button_text=action_clean,
                              on_press=self.events_callback))
+        self.ids.button_stop.bind(
+            on_press=lambda *args: self.events_callback("STOP"))
