@@ -7,6 +7,8 @@
 # В случае ошибки, выводит на экран окно с ее текстом.
 #
 
+from __future__ import print_function
+
 import os
 import sys
 import traceback
@@ -20,17 +22,15 @@ try:
     from kivy.app import App
     from kivy.config import Config
 
-    # Config.set("kivy", "keyboard_mode", "system")
-    # Config.set("kivy", "log_level", "error")
-    # Config.set("graphics", "width", "480")
-    # Config.set("graphics", "height", "720")
+    Config.set("kivy", "keyboard_mode", "system")
+
     # 360 x 640
     # 320 x 480
     # 480 x 720
     # 1920 x 1080
     from Libs.uix.bugreporter import BugReporter
 except Exception:
-    print "\n\n{}".format(traceback.format_exc())
+    print("\n\n{}".format(traceback.format_exc()))
     sys.exit(1)
 
 
@@ -46,7 +46,7 @@ def main():
         app = Program()
         app.run()
     except Exception as exc:
-        print traceback.format_exc()
+        print(traceback.format_exc())
         traceback.print_exc(file=open("{}/error.log".format(
             os.path.split(os.path.abspath(sys.argv[0]))[0]), "w"))
 
