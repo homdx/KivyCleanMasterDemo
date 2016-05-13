@@ -51,12 +51,17 @@ class ShowScreens(object):
         self.start_screen.layouts.action_previous.title = \
             self.start_screen.layouts.screen.manager.current
 
+        # Устанавливаем цвет в actionbar, который на момент открытия экрана
+        # About, использовался в экране "JUNK FILES".
         if current_screen == "About":
             self.start_screen.background_action_bar.rgb = self.new_color
             self.new_color = self.background_action_bar
+        # Возвращаем "родной", синий цвет в actionbar.
         else:
-            # Возвращение иконки previous в actionbar.
             self.start_screen.background_action_bar.rgb = \
                 self.background_action_bar
-        self.start_screen.layouts.action_previous.app_icon = \
-            "Data/Images/previous_app_icon.png"
+        # Возвращение иконки previous стартового экрана в actionbar.
+        if self.start_screen.layouts.screen_manager.screens[-1].name != \
+                "JUNK FILES":
+            self.start_screen.layouts.action_previous.app_icon = \
+                "Data/Images/previous_app_icon.png"
