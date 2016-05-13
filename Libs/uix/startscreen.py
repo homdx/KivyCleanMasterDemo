@@ -38,6 +38,8 @@ class StartScreen(BoxLayout):
         # # Виждеты стартового экрана.
         self.layouts = self.ids
         self.body_storage_ram = self.ids.float_layout
+        self.screen_manager = self.ids.screen_manager
+        self.action_previous = self.ids.action_previous
         self.background_action_bar = self.ids.action_bar.canvas.children[3]
         self.ellips_storage = self.body_storage_ram.canvas.children[8]
         self.ellips_ram = self.body_storage_ram.canvas.children[14]
