@@ -35,11 +35,13 @@ class StartScreen(BoxLayout):
         super(StartScreen, self).__init__(**kvargs)
         self.orientation = "vertical"
 
-        # Инстансы виджетов из файла разметки интерфейса startscreen.kv.
+        # # Виждеты стартового экрана.
         self.layouts = self.ids
+        self.body_storage_ram = self.ids.float_layout
         self.background_action_bar = self.ids.action_bar.canvas.children[3]
-        self.ellips_storage = self.ids.float_layout.canvas.children[8]
-        self.ellips_ram = self.ids.float_layout.canvas.children[14]
+        self.ellips_storage = self.body_storage_ram.canvas.children[8]
+        self.ellips_ram = self.body_storage_ram.canvas.children[14]
+        self._action_overflow = self.ids.action_overflow
 
         self.create_spinner_items()
         self.create_menu_buttons()
@@ -55,10 +57,9 @@ class StartScreen(BoxLayout):
                     on_press=self.events_callback, color=[.1, .1, .1, 1],
                     background_normal="Data/Images/background_action_item.png",
                     background_down="Data/Images/background_down.png",
-                    on_release=lambda *args:
-                        self.layouts.action_overflow._dropdown.select(
-                            self.on_release_select_item_spinner()))
-            self.layouts.action_overflow.add_widget(item_button)
+                    on_release=lambda *args: self._action_overflow._dropdown.select(
+                        self.on_release_select_item_spinner()))
+            self._action_overflow.add_widget(item_button)
 
     def create_menu_buttons(self):
         """Создает кнопки и подписи меню главного экрана."""
@@ -77,7 +78,7 @@ class StartScreen(BoxLayout):
                             id=name_button, on_press=self.events_callback)
             item_box.add_widget(item_button)
             item_box.add_widget(item_label)
-            self.layouts.body_buttons_menu.add_widget(item_box)
+            self.ids.body_buttons_menu.add_widget(item_box)
 
     def on_release_select_item_spinner(self):
         pass
