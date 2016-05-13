@@ -20,8 +20,10 @@ class ShowScreens(object):
         # Прерываем анимацию очистки, если About открыт из экрана "JUNK FILES".
         if self.start_screen.layouts.screen.manager.current == "JUNK FILES":
             self.Clock.unschedule(self.animation_clean)
-            self.start_screen.background_action_bar.rgb = \
-                self.background_action_bar
+            self.start_screen.background_action_bar.rgb = self.background_action_bar
+
+            self.btton_memory_bust.remove_widget(self.button_memory_bust_icon_state)
+            self.button_cache_junk.remove_widget(self.button_cache_junk_icon_state)
 
         screen_about = \
             self.About(events_callback=self.on_events, text_license=text_license)

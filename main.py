@@ -21,7 +21,13 @@ try:
 
     from kivy.app import App
     from kivy.config import Config
+    from kivy.utils import platform
 
+    # TODO: Не забыть удалить.
+    if platform != "android":
+        Config.set("graphics", "width", "480")
+        Config.set("graphics", "height", "720")
+        Config.set('graphics', 'resizable', '0')
     Config.set("kivy", "keyboard_mode", "system")
 
     # 360 x 640

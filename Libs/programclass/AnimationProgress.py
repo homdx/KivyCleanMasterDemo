@@ -23,46 +23,43 @@ class AnimationProgress(object):
 
         if self.tick <= 34:
             self.start_screen.ellips_storage.circle = \
-                ((self.start_screen.layouts.float_layout.center_x / 1.5,
-                  self.start_screen.layouts.float_layout.center_y / .65,
-                  min(self.start_screen.layouts.float_layout.width,
-                      self.start_screen.layouts.float_layout.height) / 4.5,
+                ((self.start_screen.body_storage_ram.center_x / 1.5,
+                  self.start_screen.body_storage_ram.center_y / .65,
+                  min(self.start_screen.body_storage_ram.width,
+                      self.start_screen.body_storage_ram.height) / 4.5,
                   220, elliptical_length_storage, 50))
         if self.tick <= 65:
             self.start_screen.ellips_ram.circle = \
-                ((self.start_screen.layouts.float_layout.center_x / .65,
-                  self.start_screen.layouts.float_layout.center_y / .69,
-                  min(self.start_screen.layouts.float_layout.width,
-                      self.start_screen.layouts.float_layout.height) / 7,
+                ((self.start_screen.body_storage_ram.center_x / .65,
+                  self.start_screen.body_storage_ram.center_y / .69,
+                  min(self.start_screen.body_storage_ram.width,
+                      self.start_screen.body_storage_ram.height) / 7,
                   220, elliptical_length_ram, 50))
 
     def animation_clean(self, interval):
         if int(self.tick) == 50:
-            #print self.screen_junk.layouts.grid_layout.ids
-            self.screen_junk.layouts.grid_layout.children[0].children[
-                0].source = "Data/Images/app_uninatall.png"
-            #self.screen_junk.layouts.grid_layout.children[0].children[
-            #    0].reload()
+            self.screen_junk.button_memory_bust_icon_state.source = \
+                "Data/Images/app_uninatall.png"
         elif int(self.tick) == 99:
-            self.screen_junk.layouts.grid_layout.children[1].children[
-                0].source = "Data/Images/app_uninatall.png"
-            self.screen_junk.layouts.button_stop.background_normal = \
-                "Data/Images/done_progress.png"
-            self.screen_junk.layouts.button_stop.text = \
-                "CLEAN JUNK {}MB".format(self.tick)
-            self.screen_junk.layouts.button_stop.color = [1.0, 1.0, 1.0, 1]
+            self.screen_junk.button_cache_junk_icon_state.source = \
+                "Data/Images/app_uninatall.png"
 
-        #new_color = \
+            self.screen_junk.button_stop.background_normal = \
+                "Data/Images/done_progress.png"
+            self.screen_junk.button_stop.text = \
+                "CLEAN JUNK {}MB".format(self.tick)
+            self.screen_junk.button_stop.color = [1.0, 1.0, 1.0, 1]
+
         self.set_new_color()
-        self.screen_junk._background.rgb = self.new_color
+        self.screen_junk.background.rgb = self.new_color
         self.start_screen.background_action_bar.rgb = self.new_color
 
         # Вычисление и установка линии прогресса.
         value = (self.tick * 100) / 100
-        self.screen_junk.layouts.progress_line.bar_value_percent = value
-        self.screen_junk.layouts.progress_line.redraw()
+        self.screen_junk.progress_line.bar_value_percent = value
+        self.screen_junk.progress_line.redraw()
 
-        self.screen_junk.layouts.progress_label.text = \
+        self.screen_junk.progress_label.text = \
             "Scanning: org.package {}".format(self.scan_packages[self.tick])
         self.animation_percent(
             self.screen_junk.layouts, self.animation_clean, iteration=100)
