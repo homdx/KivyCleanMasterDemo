@@ -37,11 +37,12 @@ class ShowScreens(object):
 
         current_screen = self.start_screen.layouts.screen.manager.current
 
-        # Если открыт экран процесса очистки.
+        # Если открыт экран процесса очистки, останавливаем процесс анимации.
         if current_screen == "JUNK FILES":
             self.Clock.unschedule(self.animation_clean)
 
-        if current_screen in ["About", "JUNK FILES"]:
+        # Если возвращаемся на главный экран, запускаем анимацию подсчета RAM.
+        if current_screen in ("About", "JUNK FILES"):
             self.Clock.schedule_interval(self.calc_elliptical_length, .03)
 
         if len(self.start_screen.layouts.screen_manager.screens) != 1:
