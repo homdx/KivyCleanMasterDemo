@@ -48,10 +48,6 @@ except Exception as text_error:
     raise text_error
 
 
-def p(*args):
-    pass
-
-
 class BugReporter(FloatLayout):
     title = "Bug reporter"
     label_info_for_user = StringProperty("Sorry, an error occurred in the "
@@ -86,13 +82,15 @@ class BugReporter(FloatLayout):
         if not os.path.exists(self.icon_background):
             self.icon_background = "data/logo/kivy-icon-256.png"
 
-        name_funcs_buttons = {self.txt_button_clipboard: self.callback_clipboard,
-                              self.txt_button_report: self.callback_report}
+        name_funcs_buttons = {
+            self.txt_button_clipboard: self.callback_clipboard,
+            self.txt_button_report: self.callback_report}
 
         for name_button in name_funcs_buttons.keys():
             if callable(name_funcs_buttons[name_button]):
                 self.ids.box_layout.add_widget(
-                    Button(text=name_button, on_press=name_funcs_buttons[name_button]))
+                    Button(text=name_button,
+                           on_press=name_funcs_buttons[name_button]))
 
     def on_close(self, *args):
         from kivy.app import App
