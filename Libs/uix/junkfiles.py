@@ -19,7 +19,6 @@ class JunkFiles(BoxLayout):
     """Функция обработки сигналов экрана."""
 
     Builder.load_file("Libs/uix/kv/junkfikes.kv")
-    Builder.load_file("Libs/uix/kv/custombutton.kv")
     """Макеты интерфейса"""
 
     def __init__(self, **kvargs):

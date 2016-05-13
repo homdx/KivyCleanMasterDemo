@@ -15,7 +15,6 @@ class About(BoxLayout):
     text_license = StringProperty("Clean Master")
 
     Builder.load_file("Libs/uix/kv/about.kv")
-    Builder.load_file("Libs/uix/kv/custombutton.kv")
     """Макеты интерфейса"""
 
     def __init__(self, **kvargs):
