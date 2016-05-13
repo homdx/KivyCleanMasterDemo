@@ -17,6 +17,7 @@ class ShowScreens(object):
         except Exception:
             text_license = "Clean Master"
 
+        # Прерываем анимацию очистки, если About открыт из экрана "JUNK FILES".
         if self.start_screen.layouts.screen.manager.current == "JUNK FILES":
             self.Clock.unschedule(self.animation_clean)
             self.start_screen.background_action_bar.rgb = \
