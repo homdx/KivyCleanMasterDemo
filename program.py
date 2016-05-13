@@ -40,6 +40,7 @@ class Program(App, ShowScreens, AnimationProgress):
 
     def __init__(self, **kvargs):
         super(Program, self).__init__(**kvargs)
+        # Привязывает события клавиатуры/кнопок девайса к функции-обработчику.
         Window.bind(on_keyboard=self.on_events)
 
         # Для области видимомти в пакете programclass.
