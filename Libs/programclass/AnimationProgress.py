@@ -4,6 +4,8 @@
 # AnimationProgress.py
 #
 
+import random
+
 
 class AnimationProgress(object):
     """Анимации прогрессов приложения."""
@@ -87,7 +89,11 @@ class AnimationProgress(object):
                 int(numeral_one))
             layout.storage_numeral_two.source = "Data/Images/{}.png".format(
                 int(numeral_two))
-
+            try:
+                layout.numeral_float.source = "Data/Images/{}.png".format(
+                    random.randint(1, 9))
+            except AttributeError:
+                pass
         try:
             if self.tick <= 65:
                 layout.ram_numeral_one.source = "Data/Images/{}.png".format(
@@ -117,5 +123,3 @@ class AnimationProgress(object):
         self.G += 1
         self.B -= 1
         self.new_color = self.R / 255., self.R / 255., self.B / 255.
-
-        #return new_color
