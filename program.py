@@ -16,10 +16,12 @@ try:
     from kivy.clock import Clock
     from kivy.core.window import Window
 
+    # Импорт экранов (Activity) приложения. У нас их, как вы помните, три.
     from Libs.uix.about import About
     from Libs.uix.startscreen import StartScreen
     from Libs.uix.junkfiles import JunkFiles
 
+    # Классы, управляющие переключением Activity и отрисовкой анимации.
     from Libs.programclass import ShowScreens, AnimationProgress
 except Exception:
     import traceback
@@ -36,7 +38,7 @@ class Program(App, ShowScreens, AnimationProgress):
     icon = "Data/Images/logo.png"  # иконка приложения
 
     screen_junk = None
-    """:class:`~Libs.uix.cleanscreen.CleanScreen`."""
+    """:class:`~Libs.uix.junkfiles.JunkFiles`."""
 
     def __init__(self, **kvargs):
         super(Program, self).__init__(**kvargs)
@@ -52,11 +54,11 @@ class Program(App, ShowScreens, AnimationProgress):
             [0.1568627450980392, 0.34509803921568627, 0.6784313725490196]
 
     def build(self):
-        # Главный экран программы.
+        # Главное Activity программы.
         self.start_screen = StartScreen(events_callback=self.on_events)
 
-        # Привязываем layout на изменение размеров экрана приложения
-        # к функции отрисовки эллипсов прогресса.
+        # Привязываем Activity на изменение размеров экрана приложения
+        # к функции вычисления координат и отрисовки эллипсов прогресса.
         self.start_screen.body_storage_ram.bind(pos=self.animation_storage_ram)
         self.start_screen.body_storage_ram.bind(size=self.animation_storage_ram)
 
@@ -99,9 +101,15 @@ class Program(App, ShowScreens, AnimationProgress):
         if name_current_screen == string_new_name_screen:
             return
 
+        # Создаем новый экран (Activity).
         screen = Screen(name=string_new_name_screen)
         screen.add_widget(instance_new_screen)
 
+        # Добавляем Activity в экранный менеджер;
+        # устанавливаем анимацию смены экрана;
+        # выводим Activity на экран;
+        # устанавливаем имя Activity в ActionBar;
+        # меняем иконку action_previous в левом углу ActionBar.
         self.start_screen.layouts.screen_manager.add_widget(screen)
         self.start_screen.layouts.screen.manager.transition = FadeTransition()
         self.start_screen.layouts.screen.manager.current = \

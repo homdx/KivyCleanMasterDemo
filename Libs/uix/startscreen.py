@@ -35,7 +35,7 @@ class StartScreen(BoxLayout):
         super(StartScreen, self).__init__(**kvargs)
         self.orientation = "vertical"
 
-        # # Виждеты стартового экрана.
+        # Виждеты стартового экрана.
         self.layouts = self.ids
         self.body_storage_ram = self.ids.float_layout
         self.screen_manager = self.ids.screen_manager

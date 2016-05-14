@@ -22,11 +22,11 @@ try:
     from kivy.app import App
     from kivy.config import Config
 
+    # Указываем пользоваться системным методом ввода, использующимся на
+    # платформе, в которой запущенно приложение.
     Config.set("kivy", "keyboard_mode", "system")
-    # 360 x 640
-    # 320 x 480
-    # 480 x 720
-    # 1920 x 1080
+
+    # Activity баг репорта.
     from Libs.uix.bugreporter import BugReporter
 except Exception:
     print("\n\n{}".format(traceback.format_exc()))
@@ -42,6 +42,7 @@ def main():
     try:
         from program import Program  # основной класс программы
 
+        # Запуск приложения.
         app = Program()
         app.run()
     except Exception as exc:
@@ -52,8 +53,9 @@ def main():
         if app:  # очищаем экран приложения от всех виджетов
             app.start_screen.clear_widgets()
 
-        # Вывод окна с текстом ошибки.
         class Error(App):
+            """Выводит экран с текстом ошибки."""
+
             def callback_report(self, *args):
                 """Функция отправки баг-репорта"""
 

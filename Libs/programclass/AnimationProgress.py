@@ -4,7 +4,7 @@
 # AnimationProgress.py
 #
 
-import random
+from random import randint
 
 
 class AnimationProgress(object):
@@ -85,21 +85,21 @@ class AnimationProgress(object):
         numeral_one, numeral_two = divmod(self.tick, 10)
 
         if self.tick <= 34 or iteration != 65:
-            layout.storage_numeral_one.source = "Data/Images/{}.png".format(
-                int(numeral_one))
-            layout.storage_numeral_two.source = "Data/Images/{}.png".format(
-                int(numeral_two))
+            layout.storage_numeral_one.source = \
+                "Data/Images/{}.png".format(int(numeral_one))
+            layout.storage_numeral_two.source = \
+                "Data/Images/{}.png".format(int(numeral_two))
             try:
-                layout.numeral_float.source = "Data/Images/{}.png".format(
-                    random.randint(1, 9))
+                layout.numeral_float.source = \
+                    "Data/Images/{}.png".format(randint(1, 9))
             except AttributeError:
                 pass
         try:
             if self.tick <= 65:
-                layout.ram_numeral_one.source = "Data/Images/{}.png".format(
-                    int(numeral_one))
-                layout.ram_numeral_two.source = "Data/Images/{}.png".format(
-                    int(numeral_two))
+                layout.ram_numeral_one.source = \
+                    "Data/Images/{}.png".format(int(numeral_one))
+                layout.ram_numeral_two.source = \
+                    "Data/Images/{}.png".format(int(numeral_two))
         except AttributeError:
             pass
 
