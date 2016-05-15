@@ -5,9 +5,7 @@
         id: action_bar
         canvas:
             Color:
-                rgb:
-                    0.1568627450980392, 0.34509803921568627, \
-                    0.6784313725490196
+                rgb: root.color_blue
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -27,53 +25,41 @@
         # Текущий стартовый экран.
         Screen:
             id: screen
-
             # Тело STORAGE/RAM
             FloatLayout:
                 id: float_layout
                 canvas:
                     Color:
-                        rgb:
-                            0.1607843137254902, 0.34901960784313724, \
-                            0.6784313725490196
+                        rgb: root.color_blue
                     Rectangle:
                         pos: self.pos
                         size: self.size
-
-                    # Окружность STORAGE
+                    # Статическая окружность STORAGE
                     Color:
-                        rgba:
-                            0.38823529411764707, 0.5254901960784314, \
-                            0.7764705882352941, 1
+                        rgba: root.color_ellipse_static
                     Line:
                         width: 3.
                         circle:
                             (self.center_x / 1.5, self.center_y / .65, \
                             min(self.width, self.height) / 4.5, 220, 500, 50)
-                    # Оружность прогресса STORAGE
+                    # Динамическая оружность прогресса STORAGE
                     Color:
-                        rgba:
-                            1.0, 1.0, 1.0, 1
+                        rgba: 1.0, 1.0, 1.0, 1
                     Line:
                         width: 3.
-
-                    # Окружность RAM
+                    # Статическая окружность RAM
                     Color:
-                        rgba:
-                            0.38823529411764707, 0.5254901960784314, \
-                            0.7764705882352941, 1
+                        rgba: root.color_ellipse_static
                     Line:
                         width: 3.
                         circle:
                             (self.center_x / .65, self.center_y / .69, \
                             min(self.width, self.height) / 7, 220, 500, 50)
-                    # Оружность прогресса RAM
+                    # Динамическая оружность прогресса RAM
                     Color:
-                        rgba:
-                            1.0, 1.0, 1.0, 1
+                        rgba: 1.0, 1.0, 1.0, 1
                     Line:
                         width: 3.
-
                 # Цифры процента прогресса STORAGE
                 Image:
                     id: storage_numeral_one
@@ -90,8 +76,7 @@
                     pos_hint: {"center_x": .47, "center_y": .82}
                     allow_stretch: True
                     source: "Data/Images/percent.png"
-
-                # Цифры процента прогресса STORAGE
+                # Цифры процента прогресса RAM
                 Image:
                     id: ram_numeral_one
                     size_hint: .07, .07
@@ -109,31 +94,23 @@
                     pos_hint: {"center_x": .85, "center_y": .74}
                     allow_stretch: True
                     source: "Data/Images/percent.png"
-
                 # Подписи окружностей прогресса
                 Label:
                     text: "STORAGE"
                     bold: True
                     pos_hint: {"center_x": .34, "center_y": .63}
-                    color:
-                        0.6784313725490196, 0.7294117647058823, \
-                        0.8392156862745098, 1
+                    color: root.color_label
                 Label:
                     text: "124.40MB/704.99MB"
                     bold: True
                     pos_hint: {"center_x": .34, "center_y": .68}
-                    color:
-                        0.6784313725490196, 0.7294117647058823, \
-                        0.8392156862745098, 1
+                    color: root.color_label
                     font_size: "10sp"
                 Label:
                     text: "RAM"
                     bold: True
                     pos_hint: {"center_x": .78, "center_y": .63}
-                    color:
-                        0.6784313725490196, 0.7294117647058823, \
-                        0.8392156862745098, 1
-
+                    color: root.color_label
                 # Строка состояния today_cleaned
                 Label:
                     size_hint: 1, .05
@@ -145,15 +122,14 @@
                         Rectangle:
                             pos: self.pos
                             size: self.size
-
-                # Бокс кнопок меню
+                # Бокс кнопок меню "JUNK FILES", "MEMORY BOOST"
+                # "APP MANAGER", "SECURITY & PRIVACY"
                 GridLayout:
                     id: body_buttons_menu
                     size_hint: 1, .4
                     cols: 2
                     padding: 10
                     spacing: 5
-
                     # Фоновый цвет меню
                     canvas.before:
                         Color:
@@ -161,7 +137,6 @@
                         Rectangle:
                             pos: self.pos
                             size: self.size
-
                         # Линии, рзбивающие пункты меню
                         Color:
                             rgb: 0, 0, 0

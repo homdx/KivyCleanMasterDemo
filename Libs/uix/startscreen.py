@@ -13,7 +13,7 @@ from kivy.uix.button import Button
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.actionbar import ActionItem
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, ListProperty
 
 
 class ImageButton(ButtonBehavior, Image):
@@ -27,6 +27,18 @@ class MyOwnActionButton(Button, ActionItem):
 class StartScreen(BoxLayout):
     events_callback = ObjectProperty(None)
     """Функция обработки сигналов экрана."""
+
+    color_blue = ListProperty(
+        [0.1607843137254902, 0.34901960784313724, 0.6784313725490196])
+    """Синий background экрана. """
+
+    color_label= ListProperty(
+        [0.6784313725490196, 0.7294117647058823, 0.8392156862745098, 1])
+    """Цвет подписей эллипсов STORAGE/RAM. """
+
+    color_ellipse_static= ListProperty(
+        [0.38823529411764707, 0.5254901960784314, 0.7764705882352941, 1])
+    """Цвет эллипсов STORAGE/RAM. """
 
     Builder.load_file("Libs/uix/kv/startscreen.kv")
     """Макет интерфейса"""
