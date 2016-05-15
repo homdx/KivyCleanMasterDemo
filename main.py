@@ -18,6 +18,8 @@ sys.dont_write_bytecode = True
 try:
     import kivy
     kivy.require("1.9.1")
+    from os import environ
+    environ["KIVY_PROFILE_LANG"] = '1'
 
     from kivy.app import App
     from kivy.config import Config

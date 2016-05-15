@@ -94,7 +94,7 @@ class Program(App, ShowScreens, AnimationProgress):
         """Устанавливает новый экран."""
 
         # Если пытаются открыть один и тот же экран, например, About в About.
-        name_current_screen = self.start_screen.screen.manager.current
+        name_current_screen = self.start_screen.screen_manager.current
         if name_current_screen == string_new_name_screen:
             return
 
@@ -108,7 +108,7 @@ class Program(App, ShowScreens, AnimationProgress):
         # устанавливаем имя Activity в ActionBar;
         # меняем иконку action_previous в левом углу ActionBar.
         self.start_screen.screen_manager.add_widget(screen)
-        self.start_screen.screen.manager.transition = FadeTransition()
-        self.start_screen.screen.manager.current = string_new_name_screen
+        self.start_screen.screen_manager.transition = FadeTransition()
+        self.start_screen.screen_manager.current = string_new_name_screen
         self.start_screen.action_previous.title = string_new_name_screen
         self.start_screen.action_previous.app_icon = "Data/Images/arrow_left.png"
