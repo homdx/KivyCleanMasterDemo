@@ -49,7 +49,7 @@ class StartScreen(BoxLayout):
         self.create_menu_buttons()
 
     def create_spinner_items(self):
-        """Создает кнопки для выпадающего списка ActionOverflow."""
+        """Создает кнопки для выпадающего списка меню ActionBar."""
 
         for item_name in ["Settings", "Update", "Like Us",
                           "Feedback", "FAQ", "About"]:

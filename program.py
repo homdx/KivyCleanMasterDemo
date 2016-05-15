@@ -34,11 +34,9 @@ __version__ = "0.0.1"
 class Program(App, ShowScreens, AnimationProgress):
     """Функционал программы"""
 
+    # Для десктопа.
     title = "Clean Master"  # заголовок окна программы
     icon = "Data/Images/logo.png"  # иконка приложения
-
-    screen_junk = None
-    """:class:`~Libs.uix.junkfiles.JunkFiles`."""
 
     def __init__(self, **kvargs):
         super(Program, self).__init__(**kvargs)
@@ -58,7 +56,8 @@ class Program(App, ShowScreens, AnimationProgress):
         self.start_screen = StartScreen(events_callback=self.on_events)
 
         # Привязываем Activity на изменение размеров экрана приложения
-        # к функции вычисления координат и отрисовки эллипсов прогресса.
+        # к функции вычисления координат и отрисовки эллипсов прогресса
+        # (для десктопа).
         self.start_screen.body_storage_ram.bind(pos=self.animation_storage_ram)
         self.start_screen.body_storage_ram.bind(size=self.animation_storage_ram)
 
@@ -70,26 +69,24 @@ class Program(App, ShowScreens, AnimationProgress):
         """Обработчик событий приложения."""
 
         try:
-            # События приложения.
-            event = args[0] if isinstance(args[0], str) else args[0].id
+            # События приложения - имя либо идентификатор контролла.
+            _args = args[0]
+            event = _args if isinstance(_args, str) else _args.id
         except AttributeError:
-            # События клавиатуры, кнопок девайса.
+            # События клавиатуры, кнопок девайса - код нажатай клавиши.
             event = args[1]
 
-        # -------------------------------ABOUT---------------------------------
-        if event == "About":
+        if event == "About":  # выводим Activity About
             self.show_about()
-        # ------------------ACTION BAR или BackKey на девайсе------------------
-        elif event == "on_previous" or event == 27:
+        elif event == "on_previous" or event == 27:  # возврат в к предыдущему Activity
             self.back_screen()
-        # --------------------СОБЫТИЯ МЕНЮ ГЛАВНОГО ЭКРАНА---------------------
-        elif event == "JUNK FILES":
+        elif event == "JUNK FILES":  # выводим Activity JUNK FILES
             self.show_junk_files()
             # Прерываем анимацию подсчета STORAGE/RAM.
             self.Clock.unschedule(self.calc_elliptical_length)
             # Запуск анимации прогресса очистки.
             self.Clock.schedule_interval(self.animation_clean, 0.2)
-        elif event == "STOP":
+        elif event == "STOP":   # прерываем анимацию JUNK FILES
             Clock.unschedule(self.animation_clean)
             self.back_screen()
 
@@ -97,7 +94,7 @@ class Program(App, ShowScreens, AnimationProgress):
         """Устанавливает новый экран."""
 
         # Если пытаются открыть один и тот же экран, например, About в About.
-        name_current_screen = self.start_screen.layouts.screen.manager.current
+        name_current_screen = self.start_screen.screen.manager.current
         if name_current_screen == string_new_name_screen:
             return
 
@@ -110,11 +107,8 @@ class Program(App, ShowScreens, AnimationProgress):
         # выводим Activity на экран;
         # устанавливаем имя Activity в ActionBar;
         # меняем иконку action_previous в левом углу ActionBar.
-        self.start_screen.layouts.screen_manager.add_widget(screen)
-        self.start_screen.layouts.screen.manager.transition = FadeTransition()
-        self.start_screen.layouts.screen.manager.current = \
-            string_new_name_screen
-        self.start_screen.layouts.action_previous.title = \
-            string_new_name_screen
-        self.start_screen.layouts.action_previous.app_icon = \
-            "Data/Images/arrow_left.png"
+        self.start_screen.screen_manager.add_widget(screen)
+        self.start_screen.screen.manager.transition = FadeTransition()
+        self.start_screen.screen.manager.current = string_new_name_screen
+        self.start_screen.action_previous.title = string_new_name_screen
+        self.start_screen.action_previous.app_icon = "Data/Images/arrow_left.png"
