@@ -39,6 +39,8 @@ class AnimationProgress(object):
                   220, elliptical_length_ram, 50))
 
     def animation_clean(self, interval):
+        # Меняем иконки анимации процесса из пунктов "Memory boost" и
+        # "Cache junk" на иконки-галочки.
         if int(self.tick) == 50:
             self.screen_junk.button_memory_bust_icon_state.source = \
                 "Data/Images/app_uninatall.png"
@@ -46,18 +48,21 @@ class AnimationProgress(object):
             self.screen_junk.button_cache_junk_icon_state.source = \
                 "Data/Images/app_uninatall.png"
 
+            # Устанавливаем цвет и текст кнопки STOP.
             self.screen_junk.button_stop.background_normal = \
                 "Data/Images/done_progress.png"
             self.screen_junk.button_stop.text = \
                 "CLEAN JUNK {}MB".format(self.tick)
             self.screen_junk.button_stop.color = [1.0, 1.0, 1.0, 1]
 
+        # Смена фона Activity.
         self.set_new_color()
         self.screen_junk.background.rgb = self.new_color
         self.start_screen.background_action_bar.rgb = self.new_color
 
         # Вычисление и установка линии прогресса.
         value = (self.tick * 100) / 100
+        print value
         self.screen_junk.progress_line.bar_value_percent = value
         self.screen_junk.progress_line.redraw()
 
@@ -104,7 +109,7 @@ class AnimationProgress(object):
             pass
 
     def calc_elliptical_length(self, interval):
-        """Вычисление координат эллипсов прогресса."""
+        """Вычисление координат эллипсов прогресса стартового Activity."""
 
         elliptical_length = ((self.tick * 500) // 178) + 222
 
