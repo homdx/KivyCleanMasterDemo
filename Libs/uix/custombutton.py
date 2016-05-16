@@ -5,7 +5,7 @@
 #
 from kivy.lang import Builder
 from kivy.uix.button import Button
-from kivy.properties import StringProperty, NumericProperty
+from kivy.properties import StringProperty, NumericProperty, ObjectProperty
 
 Builder.load_file("Libs/uix/kv/custombutton.kv")
 
@@ -17,3 +17,4 @@ class CustomButton(Button):
     icon = StringProperty("")
     icon_height = NumericProperty(30)
     icon_load = StringProperty("Data/Images/loading.gif")
+    event_callback = ObjectProperty(None)

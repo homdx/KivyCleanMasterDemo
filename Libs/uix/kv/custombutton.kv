@@ -10,15 +10,15 @@
     valign: "middle"
     height: root.button_height
     color: 0.1, 0.1, 0.1, 1
+    on_press: if callable(root.event_callback): root.event_callback(root.id)
 
-    # Иконка действия очистки
+    # Иконка действия очистки справа
     Image:
         source: root.icon
         size_hint_y: None
         height: root.icon_height
         pos: root.x - 25, root.y + self.height / 2
-        #root.y + self.height / 2
-    # Иконка прогресса очистки
+    # Иконка прогресса очистки слева
     Image:
         source: root.icon_load
         size_hint_y: None

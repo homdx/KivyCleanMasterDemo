@@ -38,7 +38,7 @@ class StartScreen(BoxLayout):
 
     color_ellipse_static= ListProperty(
         [0.38823529411764707, 0.5254901960784314, 0.7764705882352941, 1])
-    """Цвет эллипсов STORAGE/RAM. """
+    """Цвет статических эллипсов STORAGE/RAM. """
 
     Builder.load_file("Libs/uix/kv/startscreen.kv")
     """Макет интерфейса"""
@@ -95,4 +95,8 @@ class StartScreen(BoxLayout):
             self.ids.body_buttons_menu.add_widget(item_box)
 
     def on_release_select_item_spinner(self):
+        """Вешается на release событие кнопок спиннера ActionBar.
+        В противноном случае, список не будет автоматически скрываться."""
+
         pass
+
