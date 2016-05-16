@@ -2,7 +2,6 @@
 
 <JunkFiles>
     orientation:  "vertical"
-
     FloatLayout:
         id: float_layout
         canvas:
@@ -12,7 +11,6 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-
         # Цифровое табло прогресса
         BoxLayout:
             pos_hint: {"center_x": .5, "center_y": .75}
@@ -38,7 +36,6 @@
                 size_hint: .22, .22
                 pos_hint: {"center_y": .48}
                 source: "Data/Images/gb.png"
-
         # Линия прогресса
         ProgressLine:
             id: progress_line
@@ -50,7 +47,6 @@
             text_size: root.width - 20, root.height
             pos_hint: {"center_y": .05}
             valign: "middle"
-
     ScrollView:
         size_hint: 1, .6
         canvas.before:
@@ -64,7 +60,6 @@
             cols: 1
             size_hint_y: None
             height: self.minimum_height
-
     BoxLayout:
         size_hint_y: None
         height: 80
