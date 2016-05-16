@@ -1,9 +1,12 @@
 #! /usr/bin/python2.7
 # -*- coding: utf-8 -*-
+#
+# about.py
+#
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty, ListProperty
 
 from .custombutton import CustomButton
 
@@ -13,6 +16,8 @@ class About(BoxLayout):
     """Функция обработки сигналов экрана."""
 
     text_license = StringProperty("Clean Master")
+    about_background = ListProperty(
+        [0.7294117647058823, 0.7686274509803922, 0.8470588235294118])
 
     Builder.load_file("Libs/uix/kv/about.kv")
     """Макеты интерфейса"""

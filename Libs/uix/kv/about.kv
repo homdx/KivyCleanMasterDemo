@@ -2,7 +2,6 @@
 
 <About>:
     orientation: "vertical"
-
     ScrollView:
         GridLayout:
             cols: 1
@@ -12,18 +11,14 @@
             height: self.minimum_height
             canvas:
                 Color:
-                    rgb:
-                        0.7294117647058823, 0.7686274509803922, \
-                        0.8470588235294118
+                    rgb: root.about_background
                 Rectangle:
                     pos: self.pos
                     size: self.size
-
             # Логотип приложения
             Image:
                 source: "Data/Images/logo.png"
                 size_hint_y: None
-
             # Версия приложения
             Label:
                 text: "Clean Master 5.4.0.1395"
@@ -31,14 +26,12 @@
                 height: "10pt"
                 color: 0.1, 0.1, 0.1, 1
                 italic: True
-
             # Бокс меню share
             GridLayout:
                 id: box_share
                 cols: 1
                 size_hint_y: None
                 height: self.minimum_height
-
             # Текст лицензии
             Label:
                 text: root.text_license
@@ -48,14 +41,13 @@
                 size_hint_y: None
                 height: root.height / 2.5
                 color: 0.1, 0.1, 0.1, 1
-
     # Бокс копирайта
     BoxLayout:
         orientation: "vertical"
         size_hint: 1, .2
         canvas:
             Color:
-                rgb: 0.7294117647058823, 0.7686274509803922, 0.8470588235294118
+                rgb: root.about_background
             Rectangle:
                 pos: self.pos
                 size: self.size

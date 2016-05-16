@@ -1,6 +1,8 @@
 #:kivy 1.9.1
 
 <CustomButton@Button>
+    # Унаследованые от виджета Button свойства.
+    # Ключевое слово root - это экземпляр класса CustomButton.
     id: root.id
     text: root.button_text
     background_normal: "Data/Images/background_action_item.png"
@@ -11,7 +13,6 @@
     height: root.button_height
     color: 0.1, 0.1, 0.1, 1
     on_press: if callable(root.event_callback): root.event_callback(root.id)
-
     # Иконка действия очистки справа
     Image:
         source: root.icon
