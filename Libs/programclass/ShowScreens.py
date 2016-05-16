@@ -22,6 +22,8 @@ class ShowScreens(object):
             self.Clock.unschedule(self.animation_clean)
             self.start_screen.background_action_bar.rgb = self.background_action_bar
 
+            # Удаляем иконки анимации процесса из пунктов "Memory boost" и
+            # "Cache junk".
             self.screen_junk.button_memory_bust.remove_widget(
                 self.screen_junk.button_memory_bust_icon_state)
             self.screen_junk.button_cache_junk.remove_widget(
