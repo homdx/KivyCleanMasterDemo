@@ -118,12 +118,16 @@ class AnimationProgress(object):
             self.start_screen.layouts, self.calc_elliptical_length)
 
     def set_default_tick_rgb(self):
+        """Устанавливаем дефолтный цвет фона макета в Activity JUNK FILES."""
+
         self.tick = 9
         self.R = 41.
         self.G = 89.
         self.B = 173.
 
     def set_new_color(self):
+        """Устанавливаем новый цвет фона макета в Activity JUNK FILES."""
+
         self.R += 2
         self.G += 1
         self.B -= 1
