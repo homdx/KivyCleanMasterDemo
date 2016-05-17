@@ -62,7 +62,6 @@ class AnimationProgress(object):
 
         # Вычисление и установка линии прогресса.
         value = (self.tick * 100) / 100
-        print value
         self.screen_junk.progress_line.bar_value_percent = value
         self.screen_junk.progress_line.redraw()
 
