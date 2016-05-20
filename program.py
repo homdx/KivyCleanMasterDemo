@@ -58,12 +58,15 @@ class Program(App, ShowScreens, AnimationProgress):
         # Привязываем Activity на изменение размеров экрана приложения
         # к функции вычисления координат и отрисовки эллипсов прогресса
         # (для десктопа).
-        self.start_screen.body_storage_ram.bind(pos=self.animation_storage_ram)
-        self.start_screen.body_storage_ram.bind(size=self.animation_storage_ram)
+        self.start_screen.body_storage_ram.bind(
+            pos=self.animation_storage_ram, size=self.animation_storage_ram)
 
         # Запуск анимации прогресса подсчета STORAGE/RAM.
         Clock.schedule_interval(self.calc_elliptical_length, .03)
         return self.start_screen
+
+    def on_pause(self):
+        return True
 
     def on_events(self, *args):
         """Обработчик событий приложения."""
@@ -75,11 +78,13 @@ class Program(App, ShowScreens, AnimationProgress):
         except AttributeError:
             # События клавиатуры, кнопок девайса - код нажатай клавиши.
             event = args[1]
+        print event
 
         if event == "About":  # выводим Activity About
             self.show_about()
-        elif event == "on_previous" or event == 27:  # возврат в к предыдущему Activity
+        elif event == "on_previous" or event in (1000, 27):  # предыдущее Activity
             self.back_screen()
+            return True
         elif event == "JUNK FILES":  # выводим Activity JUNK FILES
             self.show_junk_files()
             # Прерываем анимацию подсчета STORAGE/RAM.
@@ -111,4 +116,5 @@ class Program(App, ShowScreens, AnimationProgress):
         self.start_screen.screen_manager.transition = FadeTransition()
         self.start_screen.screen_manager.current = string_new_name_screen
         self.start_screen.action_previous.title = string_new_name_screen
-        self.start_screen.action_previous.app_icon = "Data/Images/arrow_left.png"
+        self.start_screen.action_previous.app_icon = \
+            "Data/Images/arrow_left.png"
