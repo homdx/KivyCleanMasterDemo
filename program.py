@@ -78,13 +78,11 @@ class Program(App, ShowScreens, AnimationProgress):
         except AttributeError:
             # События клавиатуры, кнопок девайса - код нажатай клавиши.
             event = args[1]
-        print event
 
         if event == "About":  # выводим Activity About
             self.show_about()
         elif event == "on_previous" or event in (1000, 27):  # предыдущее Activity
             self.back_screen()
-            return True
         elif event == "JUNK FILES":  # выводим Activity JUNK FILES
             self.show_junk_files()
             # Прерываем анимацию подсчета STORAGE/RAM.
@@ -94,6 +92,7 @@ class Program(App, ShowScreens, AnimationProgress):
         elif event == "STOP":   # прерываем анимацию JUNK FILES
             Clock.unschedule(self.animation_clean)
             self.back_screen()
+        return True
 
     def show_new_screen(self, instance_new_screen, string_new_name_screen):
         """Устанавливает новый экран."""
