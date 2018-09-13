@@ -76,13 +76,13 @@ android.ndk = 9
 android.private_storage = False
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/zavulon/Opt/android-ndk-r9
+#android.ndk_path = /home/zavulon/Opt/android-ndk-r9
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/zavulon/Opt/android-sdk
+#android.sdk_path = /home/zavulon/Opt/android-sdk
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
-android.p4a_dir = /home/zavulon/Opt/Python/python-for-android
+#android.p4a_dir = /home/zavulon/Opt/Python/python-for-android
 
 # (list) python-for-android whitelist
 #android.p4a_whitelist =
