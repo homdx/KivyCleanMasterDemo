@@ -66,7 +66,7 @@ USER ${USER}
 
 COPY . .
 
-RUN buildozer android debug || /bin/true
+RUN rm buildozer.spec && buildozer init && buildozer android debug || cp /home/user/hostcwd/.buildozer/android/platform/build/dists/myapp/bin/MyApplication-0.1-debug.apk KivyClean.apk
 
 CMD tail -f /var/log/faillog
 
